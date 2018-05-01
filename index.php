@@ -6,6 +6,12 @@ include('header.php');
 
 <div class="container">
     <div class="row">
+        <div class="content col s12">
+            <div class="top-menu">
+                <a href="#" class="btn">New Post</a>
+            </div>
+        </div>
+
         <div class="content col s12 m6">
             <div class="content-header col s12">
                 Custom Box
@@ -52,6 +58,23 @@ include('header.php');
                     <td>Netherlands</td>
                 </tr>
             </table>
+        </div>
+
+        <div class="content col s12 m6">
+            <div class="content-header col s12">
+                Custom Box
+            </div>
+
+            <div class="content-box col s12">
+                <form>
+                    <p>
+                        <label>
+                            <input type="checkbox" class="filled-in" checked="checked" />
+                            <span>Permission #1</span>
+                        </label>
+                    </p>
+                </form>
+            </div>
         </div>
     </div>
 </div>

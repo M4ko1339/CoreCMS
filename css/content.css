@@ -73,6 +73,11 @@
     border-radius: 3px;
 }
 
+.content
+{
+    margin-bottom: 20px;
+}
+
 .content-header
 {
     background-color: #222;
@@ -87,5 +92,37 @@
 {
     background-color: #111;
     border: 1px #222 solid;
-    padding: 10px !important;
+    padding: 0px !important;
+}
+
+.pages
+{
+
+}
+
+.pages li a
+{
+    height: 33px;
+    padding: 5px 8px 5px 8px;
+    float: left;
+    color: #EEE;
+    background-color: #222;
+    margin-right: 5px;
+}
+
+.pages li a:hover
+{
+    background-color: #333;
+}
+
+.pages li .current-nav
+{
+    background-color: #4CAF50;
+}
+
+.fa-chevron-left, .fa-chevron-right
+{
+    height: 33px;
+    font-size: 0.8rem;
+    padding: 5px 0px 0px 0px;
 }

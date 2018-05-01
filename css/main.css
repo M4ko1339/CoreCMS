@@ -20,9 +20,9 @@ body
     background-color: #4CAF50 !important;
     padding: 0px 10px 5px 10px;
     height: 37px;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
-    font-size: 0.8rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 0.75rem;
 }
 
 .btn:hover, .btn:active, .btn:focus
@@ -33,6 +33,11 @@ body
 .active
 {
     border-color: red !important;
+}
+
+.input-field
+{
+    padding: 10px !important;
 }
 
 .input-field input[type="text"]:focus + label
