@@ -23,38 +23,30 @@
     list-style-type: none;
     padding: 0px;
     margin: 0px;
+        float: right;
+}
+
+.menu ul li
+{
+    float: left;
 }
 
 .menu ul li a
 {
-    float: left;
+    padding: 9px;
     text-decoration: none;
     color: #DDD;
-    padding: 10px;
-    margin-right: 5px;
-    background-color: #222;
+    margin-left: 5px;
 }
 
 .menu ul li a:hover
 {
-    background-color: #27ae60;
+
 }
 
 .menu ul li .current-nav
 {
-    background-color: #27ae60;
-}
-
-.content
-{
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.content-box
-{
-    padding: 0px !important;
-    background-color: #222;
+    color: #4CAF50;
 }
 
 .logout
@@ -67,73 +59,22 @@
     opacity: 0.8;
 }
 
-table
+.notifications
 {
-    border-collapse: collapse;
-    margin: 0px;
-    padding: 0px;
+    padding: 10px !important;
+    margin: 0px !important;
 }
 
-th
+.notification
 {
-    color: #DDD;
-    background-color: #27ae60 !important;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    border-radius: 0px;
+    text-align: center;
     padding: 10px;
+    border-radius: 3px;
 }
 
-tr:nth-child(odd)
+.content-box
 {
     background-color: #111;
-}
-
-tr:nth-child(even)
-{
-    background-color: #222;
-}
-
-td
-{
-    color: #BBB;
-    padding: 10px;
-}
-
-td:last-of-type
-{
-    text-align: right;
-}
-
-.btn.delete
-{
-    padding: 3px 10px 5px 10px;
-    background-color: #e74c3c;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
-    font-size: 0.8rem;
-    border: 0px;
-}
-
-.btn.delete:hover
-{
-    background-color: #c0392b;
-    border: 0px;
-}
-
-.btn.edit
-{
-    padding: 3px 7px 5px 10px;
-    background-color: #3498db;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
-    font-size: 0.8rem;
-    border: 0px;
-}
-
-.btn.edit:hover
-{
-    background-color: #2980b9;
-    border: 0px;
+    border: 1px #222 solid;
+    padding: 10px !important
 }
