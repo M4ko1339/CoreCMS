@@ -17,19 +17,60 @@ body
 
 .btn
 {
-    margin-top: 10px;
-    margin-right: 10px;
+    background-color: #4CAF50 !important;
     padding: 0px 10px 5px 10px;
-    height: 40px;
-    background-color: transparent;
-    border: 2px #333 solid;
+    height: 37px;
     font-family: 'Raleway', sans-serif;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .btn:hover, .btn:active, .btn:focus
 {
-    background-color: transparent;
-    border-color: #555;
+    background-color: #3D8A3F !important;
+}
+
+.active
+{
+    border-color: red !important;
+}
+
+.input-field input[type="text"]:focus + label
+{
+    color: red !important;
+    border-bottom: 1px solid #000 !important;
+    box-shadow: 0 1px 0 0 #000 !important;
+}
+
+.input-field input[type="text"].valid
+{
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+}
+
+table
+{
+    border: 1px #222 solid;
+}
+
+th
+{
+    background-color: #222;
+    padding: 10px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+tr:nth-child(odd)
+{
+    background-color: #222 !important;
+}
+
+td
+{
+    padding: 10px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
 }
