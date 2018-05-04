@@ -122,16 +122,36 @@ Class User
         return false;
     }
 
-    public function Verify()
+    private function Verify($username, $password)
     {
+        global $con;
 
+        $data = $con->prepare('SELECT COUNT(*) FROM users WHERE username = :username AND password = :password');
+        $data->execute(array(
+            ':username' => $username,
+            ':password' => $password
+        ));
+
+        if($data->fetchColumn() == 1)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public function Authenticated()
     {
         if(isset($_SESSION['username']) && isset($_SESSION['password']))
         {
-            return true;
+            if(Verify($_SESSION['username'], $_SESSION['password']))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         return false;
