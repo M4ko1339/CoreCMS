@@ -32,9 +32,9 @@ $notify = new Notification();
 
             <div class="menu col m8">
                 <ul>
-                    <li><a href="#" class="current-nav"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                    <li><a href="#"><i class="far fa-newspaper"></i> News</a></li>
-                    <li><a href="#"><i class="fas fa-users"></i> Users</a></li>
+                    <li><a href="index.php" class="current-nav"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="news.php"><i class="far fa-newspaper"></i> News</a></li>
+                    <li><a href="users.php"><i class="fas fa-users"></i> Users</a></li>
                     <li><a href="#" class="logout"><i class="fas fa-power-off"></i> Logout</a></li>
                 </ul>
             </div>
