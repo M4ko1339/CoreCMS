@@ -61,6 +61,23 @@ Class News
             ':id' => $id
         ));
     }
+
+    public function Exist($id)
+    {
+        global $con;
+
+        $data = $con->prepare('SELECT COUNT(*) FROM news WHERE id = :id');
+        $data->execute(array(
+            ':id' => $id
+        ));
+
+        if($data->fetchColumn() == 1)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }
 
 Class User
@@ -274,7 +291,7 @@ Class Sanitize
 
     public function Text($input)
     {
-        
+
     }
 }
 
