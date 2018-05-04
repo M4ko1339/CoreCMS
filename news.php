@@ -16,9 +16,9 @@ $news = new News();
 
         <div class="content col s12">
             <?php if(isset($_GET['action']) && $_GET['action'] == "newpost"): ?>
-
-            <?php elseif(isset($_GET['edit']) && $news->Exist((int)$_GET['edit'])): ?>
                 
+            <?php elseif(isset($_GET['edit']) && $news->Exist((int)$_GET['edit'])): ?>
+
             <?php else: ?>
                 <table class="responsive-table">
                     <th>Title</th>
