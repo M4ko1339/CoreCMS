@@ -200,9 +200,9 @@ Class Notification
         global $con;
 
         $colors = array(
-            0 => '#2ecc71', // Green
-            1 => '#f39c12', // Orange
-            2 => '#e74c3c'  // Red
+            0 => 'green', // Green
+            1 => 'orange', // Orange
+            2 => 'red'  // Red
         );
 
         $data = $con->prepare('UPDATE notfications SET type = :type, message = :message, active = 1 WHERE id = 1');
@@ -236,7 +236,7 @@ Class Notification
         }
     }
 
-    public function Show()
+    public function Broadcast()
     {
         global $con;
 
@@ -250,6 +250,10 @@ Class Notification
 
             return $data->fetchAll(PDO::FETCH_ASSOC);
         }
+        else
+        {
+            return false;
+        }
     }
 }
 
@@ -257,7 +261,14 @@ Class Logging
 {
     public function Error()
     {
+        global $con;
 
+        $data = $con->prepare('INSERT INTO error_logs (error_type, error_message, error_time) VALUES(:type, :error_msg, :error_time)');
+        $data->execute(array(
+            ':type'        => $type,
+            ':error_msg'   => $error,
+            ':error_ time' => time()
+        ));
     }
 }
 

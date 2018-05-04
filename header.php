@@ -3,6 +3,8 @@
 include('inc/db.php');
 include('inc/functions.php');
 
+$notify = new Notification();
+
 ?>
 <html>
 <head>
@@ -40,12 +42,16 @@ include('inc/functions.php');
     </div>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="notifications col s12">
-            <div class="notification red">
-                Important message to staff
+<?php if($notify->Broadcast()): ?>
+    <div class="container">
+        <div class="row">
+            <div class="notifications col s12">
+                <?php foreach($notify->Broadcast() as $row): ?>
+                    <div class="notification <?php echo $row['type']; ?>">
+                        <?php echo $row['message']; ?>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
-</div>
+<?php endif; ?>

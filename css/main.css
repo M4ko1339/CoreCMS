@@ -23,6 +23,7 @@ body
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-size: 0.75rem;
+    margin: 0px !important;
 }
 
 .btn:hover, .btn:active, .btn:focus
@@ -62,8 +63,8 @@ th
 {
     background-color: #222;
     padding: 10px;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
     font-size: 1rem;
 }
 
@@ -75,7 +76,7 @@ tr:nth-child(odd)
 td
 {
     padding: 10px;
-    font-family: 'Raleway', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-size: 1rem;
 }

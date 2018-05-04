@@ -4,6 +4,7 @@
     height: 40px;
     background-color: #111;
     border-bottom: 1px #222 solid;
+    margin-bottom: 10px;
 }
 
 .logo
@@ -62,7 +63,7 @@
 
 .notifications
 {
-    padding: 10px !important;
+    padding: 0px 10px 0px 10px !important;
     margin: 0px !important;
 }
 
@@ -83,8 +84,8 @@
     background-color: #222;
     height: 40px;
     padding: 10px !important;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
     font-size: 1rem;
 }
 
