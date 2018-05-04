@@ -2,14 +2,12 @@
 
 Class News
 {
-    public function Show($param = "")
+    public function Show()
     {
         global $con;
 
-        $data = $con->prepare('SELECT * FROM news :param');
-        $data->execute(array(
-            ':param' => $param
-        ));
+        $data = $con->prepare('SELECT * FROM news ORDER BY id DESC');
+        $data->execute();
 
         return $data->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -254,6 +252,29 @@ Class Notification
         {
             return false;
         }
+    }
+}
+
+Class Sanitize
+{
+    public function Username($input)
+    {
+
+    }
+
+    public function Email($input)
+    {
+
+    }
+
+    public function Password($input)
+    {
+
+    }
+
+    public function Text($input)
+    {
+        
     }
 }
 
