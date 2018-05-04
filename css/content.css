@@ -127,3 +127,12 @@
     font-size: 0.8rem;
     padding: 5px 0px 0px 0px;
 }
+
+.response
+{
+    height: 40px;
+    margin-top: 10px !important;
+    padding: 10px !important;
+    text-align: center;
+    border-radius: 3px;
+}

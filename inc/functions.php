@@ -78,6 +78,23 @@ Class News
 
         return false;
     }
+
+    public function Duplicate($title)
+    {
+        global $con;
+
+        $data = $con->prepare('SELECT COUNT(*) FROM news WHERE title = :title');
+        $data->execute(array(
+            ':title' => $title
+        ));
+
+        if($data->fetchColumn() > 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }
 
 Class User
@@ -101,7 +118,6 @@ Class User
             ':register_date' => time(),
             ':last_login'    => 0
         ));
-
     }
 
     public function Duplicate($username, $email)
@@ -235,9 +251,9 @@ Class Notification
         global $con;
 
         $colors = array(
-            0 => 'green', // Green
+            0 => 'green',  // Green
             1 => 'orange', // Orange
-            2 => 'red'  // Red
+            2 => 'red'     // Red
         );
 
         $data = $con->prepare('UPDATE notfications SET type = :type, message = :message, active = 1 WHERE id = 1');
