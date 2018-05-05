@@ -12,6 +12,9 @@ $_SESSION['username'] = 'M4ko';
     <div class="row">
         <div class="content col s12">
             <div class="top-menu">
+                <?php if(isset($_GET['edit']) || isset($_GET['action'])): ?>
+                    <a href="news.php" class="btn back-button"><i class="fas fa-chevron-left"></i></a>
+                <?php endif; ?>
                 <a href="?action=newpost" class="btn">New Post</a>
             </div>
         </div>
@@ -59,7 +62,42 @@ $_SESSION['username'] = 'M4ko';
                     <?php endif; ?>
                 <?php endif; ?>
             <?php elseif(isset($_GET['edit']) && $news->Exist((int)$_GET['edit'])): ?>
+                <?php foreach($news->View((int)$_GET['edit']) as $row): ?>
+                    <div class="content-header col s12">
+                        Modifying post: <span class="green-text"><?php echo $row['title']; ?></span>
+                    </div>
 
+                    <div class="content-box col s12">
+                        <form method="POST">
+                            <div class="input-field col s12">
+                                <label>Title</label>
+                                <input type="text" name="title" value="<?php echo $row['title']; ?>" />
+                            </div>
+
+                            <div class="input-field col s12">
+                                <label>Content</label>
+                                <textarea class="materialize-textarea" name="content"><?php echo $row['content']; ?></textarea>
+                            </div>
+
+                            <div class="input-field col s12">
+                                <input type="submit" name="edit" class="btn" value="Confirm" />
+                            </div>
+                        </form>
+                    </div>
+                <?php endforeach; ?>
+
+                <?php if(isset($_POST['edit'])): ?>
+                    <?php if(!empty($_POST['title']) && !empty($_POST['content'])): ?>
+                        <?php $news->Edit((int)$_GET['edit'], $_POST['title'], $_SESSION['username'], $_POST['content']); ?>
+                        <div class="response col s12 green">
+                            Successfully modified post!
+                        </div>
+                    <?php else: ?>
+                        <div class="response col s12 red">
+                            Please fill in all fields!
+                        </div>
+                    <?php endif; ?>
+                <?php endif; ?>
             <?php elseif(isset($_GET['delid']) && $news->Exist((int)$_GET['delid'])): ?>
                 <?php
                     $news->Delete((int)$_GET['delid']);

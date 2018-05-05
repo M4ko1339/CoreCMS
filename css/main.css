@@ -31,6 +31,11 @@ body
     background-color: #3D8A3F !important;
 }
 
+.back-button i
+{
+    padding: 1px 0px 0px 0px !important;
+}
+
 .active
 {
     border-color: red !important;
