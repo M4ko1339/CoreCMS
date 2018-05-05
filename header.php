@@ -29,7 +29,9 @@ $notify = new Notification();
     <div class="container">
         <div class="row">
             <div class="logo col m4">
-                Core<span class="green-text">CMS</span>
+                <a href="index.php">
+                    Core<span class="green-text">CMS</span>
+                </a>
             </div>
 
             <div class="menu col m8">
