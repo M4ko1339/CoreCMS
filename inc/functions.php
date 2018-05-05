@@ -99,6 +99,16 @@ Class News
 
 Class User
 {
+    public function Show()
+    {
+        global $con;
+
+        $data = $con->prepare('SELECT * FROM users ORDER BY id DESC');
+        $data->execute();
+
+        return $data->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function Create($username, $password, $email, $perms)
     {
         global $con;
@@ -159,7 +169,7 @@ Class User
 
                 return false;
             }
-            
+
             if(Verify($_SESSION['username'], $_SESSION['password']))
             {
                 return true;
