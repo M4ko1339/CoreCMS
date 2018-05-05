@@ -76,7 +76,7 @@ $_SESSION['username'] = 'M4ko';
 
                             <div class="input-field col s12">
                                 <label>Content</label>
-                                <textarea class="materialize-textarea" name="content"><?php echo $row['content']; ?></textarea>
+                                <textarea class="materialize-textarea" name="content"><?php echo str_replace("<br>", "\n", $row['content']); ?></textarea>
                             </div>
 
                             <div class="input-field col s12">
@@ -117,7 +117,7 @@ $_SESSION['username'] = 'M4ko';
                         <tr>
                             <td><?php echo $row['title']; ?></td>
                             <td><?php echo ucfirst($row['author']); ?></td>
-                            <td><?php echo substr($row['content'], 0, 30); ?>..</td>
+                            <td><?php echo str_replace("<br>", " ", substr($row['content'], 0, 30)); ?>..</td>
                             <td><?php echo date('j. F, Y', $row['post_date']); ?></td>
                             <td><a href="?edit=<?php echo $row['id']; ?>"><i class="far fa-edit green-text"></i></a></td>
                             <td class="right"><a href="?delid=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure?');"><i class="fas fa-trash red-text"></i></a></td>

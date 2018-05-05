@@ -18,7 +18,7 @@ Class News
 
         $data = $con->prepare('SELECT * FROM news WHERE id = :id');
         $data->execute(array(
-            ':id' => $id
+            ':id' => (int)$id
         ));
 
         return $data->fetchAll(PDO::FETCH_ASSOC);
@@ -33,7 +33,7 @@ Class News
         $data->execute(array(
             ':title'     => $title,
             ':author'    => $author,
-            ':content'   => $content,
+            ':content'   => nl2br($content),
             ':post_date' => time()
         ));
     }
@@ -46,8 +46,8 @@ Class News
         $data->execute(array(
             ':title'   => $title,
             ':author'  => $author,
-            ':content' => $content,
-            ':id'      => $id
+            ':content' => nl2br($content),
+            ':id'      => (int)$id
         ));
 
     }
@@ -58,7 +58,7 @@ Class News
 
         $data = $con->prepare('DELETE FROM news WHERE id = :id');
         $data->execute(array(
-            ':id' => $id
+            ':id' => (int)$id
         ));
     }
 
@@ -68,7 +68,7 @@ Class News
 
         $data = $con->prepare('SELECT COUNT(*) FROM news WHERE id = :id');
         $data->execute(array(
-            ':id' => $id
+            ':id' => (int)$id
         ));
 
         if($data->fetchColumn() == 1)
@@ -173,31 +173,31 @@ Class User
         return false;
     }
 
+    public function Salt($username)
+    {
+        global $con;
+
+        $data = $con->prepare('SELECT salt FROM users WHERE username = :username');
+        $data->execute(array(
+            ':username' => $username
+        ));
+
+        $result = $data->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($result as $row)
+        {
+            return $row['salt'];
+        }
+    }
+
     public function Login($username, $password)
     {
         global $con;
 
-        function GetSalt($username)
-        {
-            global $con;
-
-            $data = $con->prepare('SELECT salt FROM users WHERE username = :username');
-            $data->execute(array(
-                ':username' => $username
-            ));
-
-            $result = $data->fetchAll(PDO::FETCH_ASSOC);
-
-            foreach($result as $row)
-            {
-                return $row['salt'];
-            }
-        }
-
         $data = $con->prepare('SELECT COUNT(*) FROM users WHERE username = :username AND password = :password');
         $data->execute(array(
             ':username' => $username,
-            ':password' => sha1($password . GetSalt($username))
+            ':password' => sha1($password)
         ));
 
         if($data->fetchColumn() == 1)
