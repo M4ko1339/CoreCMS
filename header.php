@@ -36,9 +36,9 @@ $notify = new Notification();
 
             <div class="menu col m8">
                 <ul>
-                    <li><a href="index.php" class="current-nav"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                    <li><a href="news.php"><i class="far fa-newspaper"></i> News</a></li>
-                    <li><a href="users.php"><i class="fas fa-users"></i> Users</a></li>
+                    <li><a href="index.php" <?php echo (basename($_SERVER["PHP_SELF"]) == "index.php" || "")?"class=\"current-nav\"":""; ?>><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="news.php"  <?php echo (basename($_SERVER["PHP_SELF"]) == "news.php")?"class=\"current-nav\"":""; ?>><i class="far fa-newspaper"></i> News</a></li>
+                    <li><a href="users.php" <?php echo (basename($_SERVER["PHP_SELF"]) == "users.php")?"class=\"current-nav\"":""; ?>><i class="fas fa-users"></i> Users</a></li>
                     <li><a href="#" class="logout"><i class="fas fa-power-off"></i> Logout</a></li>
                 </ul>
             </div>
