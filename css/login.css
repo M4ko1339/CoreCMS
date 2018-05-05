@@ -1,0 +1,22 @@
+.login
+{
+    margin-top: 50px;
+}
+
+.login-box
+{
+    border: 1px #222 solid;
+}
+
+.login-box-header
+{
+    height: 40px;
+    background-color: #222;
+    padding: 10px;
+}
+
+.login-box-content
+{
+    padding: 10px;
+    background-color: #111;
+}

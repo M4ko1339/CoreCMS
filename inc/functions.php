@@ -173,9 +173,39 @@ Class User
         return false;
     }
 
-    public function Login()
+    public function Login($username, $password)
     {
+        global $con;
 
+        function GetSalt($username)
+        {
+            global $con;
+
+            $data = $con->prepare('SELECT salt FROM users WHERE username = :username');
+            $data->execute(array(
+                ':username' => $username
+            ));
+
+            $result = $data->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach($result as $row)
+            {
+                return $row['salt'];
+            }
+        }
+
+        $data = $con->prepare('SELECT COUNT(*) FROM users WHERE username = :username AND password = :password');
+        $data->execute(array(
+            ':username' => $username,
+            ':password' => sha1($password . GetSalt($username))
+        ));
+
+        if($data->fetchColumn() == 1)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public function Register()

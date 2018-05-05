@@ -105,7 +105,7 @@
 {
     background-color: #111;
     border: 1px #222 solid;
-    padding: 0px !important;
+    padding: 10px !important;
 }
 
 .pages
@@ -138,13 +138,4 @@
     height: 33px;
     font-size: 0.8rem;
     padding: 5px 0px 0px 0px;
-}
-
-.response
-{
-    height: 40px;
-    margin-top: 10px !important;
-    padding: 10px !important;
-    text-align: center;
-    border-radius: 3px;
 }
