@@ -54,10 +54,14 @@ $user  = new User();
 
                 <?php if(isset($_POST['login'])): ?>
                     <?php if(!empty($_POST['username']) && !empty($_POST['password'])): ?>
-                        <?php if($user->Login($_POST['username'], $_POST['password'])): ?>
-                            <div class="response green">
-                                Connected!
-                            </div>
+                        <?php if($user->Login($_POST['username'], $_POST['password'] . $user->Salt($_POST['username']))): ?>
+                            <?php
+                                $_SESSION['username'] = $_POST['username'];
+                                $_SESSION['password'] = sha1($_POST['password'] . $user->Salt($_POST['username']));
+
+                                header('Location: index.php');
+                                exit;
+                            ?>
                         <?php else: ?>
                             <div class="response red">
                                 Username or password was incorrect!
