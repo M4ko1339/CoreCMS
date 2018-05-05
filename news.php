@@ -22,7 +22,7 @@ $_SESSION['username'] = 'M4ko';
         <div class="content col s12">
             <?php if(isset($_GET['action']) && $_GET['action'] == "newpost"): ?>
                 <div class="content-header col s12">
-                    New news post
+                    Create a new post
                 </div>
 
                 <div class="content-box col s12">
