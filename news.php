@@ -4,8 +4,6 @@ include('header.php');
 
 $news = new News();
 
-$_SESSION['username'] = 'M4ko';
-
 ?>
 
 <div class="container">

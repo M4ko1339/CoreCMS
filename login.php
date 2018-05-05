@@ -7,6 +7,12 @@ include('inc/functions.php');
 
 $user  = new User();
 
+if($user->Authenticated())
+{
+    header('Location: index.php');
+    exit;
+}
+
 ?>
 <html>
 <head>
