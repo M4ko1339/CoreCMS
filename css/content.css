@@ -139,3 +139,18 @@
     font-size: 0.8rem;
     padding: 5px 0px 0px 0px;
 }
+
+fieldset
+{
+    padding: 10px !important;
+    border: 1px #9e9e9e solid;
+}
+
+legend
+{
+    color: #DDD;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 0.8rem;
+    padding: 5px;
+}

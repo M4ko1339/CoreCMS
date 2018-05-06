@@ -44,6 +44,7 @@ body
 .input-field
 {
     padding: 0px !important;
+    margin-bottom: 0px !important;
 }
 
 .input-field input[type="text"]:focus + label
@@ -62,6 +63,25 @@ body
 .input-field.col label
 {
     left: 0px !important;
+}
+
+
+[type="checkbox"]+span:not(.lever)
+{
+    line-height: 20px !important;
+    padding-left: 25px !important;
+    margin-right: 10px;
+}
+
+[type="checkbox"].filled-in:checked+span:not(.lever):after
+{
+    background-color: #449C47;
+    border-color: #449C47;
+}
+
+input[type="text"], input[type="password"], option
+{
+    color: #DDD;
 }
 
 table

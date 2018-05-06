@@ -109,6 +109,35 @@ Class User
         return $data->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function View($id)
+    {
+        global $con;
+
+        $data = $con->prepare('SELECT * FROM users WHERE id = :id');
+        $data->execute(array(
+            ':id' => $id
+        ));
+
+        return $data->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function Exist($id)
+    {
+        global $con;
+
+        $data = $con->prepare('SELECT COUNT(*) FROM users WHERE id = :id');
+        $data->execute(array(
+            ':id' => (int)$id
+        ));
+
+        if($data->fetchColumn() == 1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public function Create($username, $password, $email, $perms)
     {
         global $con;
@@ -273,6 +302,26 @@ Class Permissions
             'user_edit'   => 0,
             'user_ban'    => 1,
             'user_delete' => 0,
+        ));
+    }
+
+    public function Administrator()
+    {
+        return json_encode(array(
+            // General AdminCP
+            'login'       => 1,
+
+            // News System
+            'news_post'   => 1,
+            'news_edit'   => 1,
+            'news_delete' => 1,
+
+            // User System
+            'user_create' => 1,
+            'user_reset'  => 1,
+            'user_edit'   => 1,
+            'user_ban'    => 1,
+            'user_delete' => 1,
         ));
     }
 
