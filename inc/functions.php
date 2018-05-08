@@ -325,6 +325,33 @@ Class Permissions
         ));
     }
 
+    public function Access($username, $action)
+    {
+        global $con;
+
+        $data = $con->prepare('SELECT * FROM users WHERE username = :username');
+        $data->execute(array(
+            ':username' => $username
+        ));
+
+        foreach($data->fetchAll(PDO::FETCH_ASSOC) as $row)
+        {
+            $perm = json_decode($row['permissions'], true);
+        }
+
+        if($perm[$action] == "1")
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function Fetch($value)
+    {
+        return json_encode($value);
+    }
+
     public function Get($username)
     {
         global $con;

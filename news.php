@@ -13,7 +13,10 @@ $news = new News();
                 <?php if(isset($_GET['edit']) || isset($_GET['action'])): ?>
                     <a href="news.php" class="btn back-button"><i class="fas fa-chevron-left"></i></a>
                 <?php endif; ?>
-                <a href="?action=newpost" class="btn">New Post</a>
+
+                <?php if($perms->Access($_SESSION['username'], 'news_post')): ?>
+                    <a href="?action=newpost" class="btn">New Post</a>
+                <?php endif; ?>
             </div>
         </div>
 

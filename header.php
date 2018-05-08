@@ -14,6 +14,7 @@ if(!$user->Authenticated())
 }
 
 $notify = new Notification();
+$perms  = new Permissions();
 
 ?>
 <html>

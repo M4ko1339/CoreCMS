@@ -5,6 +5,8 @@ include('header.php');
 $user  = new User();
 $perms = new Permissions();
 
+$array = $perms->Get('test');
+
 ?>
 
 <div class="container">
@@ -51,7 +53,7 @@ $perms = new Permissions();
                                 <legend>General Permissions</legend>
                                 <p>
                                     <label>
-                                        <input type="checkbox" class="filled-in" checked="checked" />
+                                        <input type="checkbox" class="filled-in" name="login_access" value="1" />
                                         <span>Login Access</span>
                                     </label>
                                 </p>
@@ -61,22 +63,22 @@ $perms = new Permissions();
                                 <legend>News Permissions</legend>
                                 <p>
                                     <label>
-                                        <input type="checkbox" class="filled-in" checked="checked" />
+                                        <input type="checkbox" class="filled-in" name="news_access" value="1"/>
                                         <span>View News</span>
                                     </label>
 
                                     <label>
-                                        <input type="checkbox" class="filled-in" checked="checked" />
+                                        <input type="checkbox" class="filled-in" name="news_post" value="1" />
                                         <span>Post News</span>
                                     </label>
 
                                     <label>
-                                        <input type="checkbox" class="filled-in" checked="checked" />
+                                        <input type="checkbox" class="filled-in" name="news_edit" value="1" />
                                         <span>Edit News</span>
                                     </label>
 
                                     <label>
-                                        <input type="checkbox" class="filled-in" checked="checked" />
+                                        <input type="checkbox" class="filled-in" name="news_delete" value="1" />
                                         <span>Delete News</span>
                                     </label>
                                 </p>
@@ -86,22 +88,32 @@ $perms = new Permissions();
                                 <legend>Users Permissions</legend>
                                 <p>
                                     <label>
-                                        <input type="checkbox" class="filled-in" checked="checked" />
+                                        <input type="checkbox" class="filled-in" name="user_access" value="1" />
                                         <span>View Users</span>
                                     </label>
 
                                     <label>
-                                        <input type="checkbox" class="filled-in" checked="checked" />
+                                        <input type="checkbox" class="filled-in" name="user_create" value="1" />
                                         <span>Create Users</span>
                                     </label>
 
                                     <label>
-                                        <input type="checkbox" class="filled-in" checked="checked" />
+                                        <input type="checkbox" class="filled-in" name="user_reset" value="1" />
+                                        <span>Reset Users</span>
+                                    </label>
+
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="user_edit" value="1" />
                                         <span>Edit Users</span>
                                     </label>
 
                                     <label>
-                                        <input type="checkbox" class="filled-in" checked="checked" />
+                                        <input type="checkbox" class="filled-in" name="user_ban" value="1" />
+                                        <span>Ban Users</span>
+                                    </label>
+
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="user_delete" value="1" />
                                         <span>Delete Users</span>
                                     </label>
                                 </p>
@@ -109,10 +121,31 @@ $perms = new Permissions();
                         </div>
 
                         <div class="input-field col s12">
-                            <input type="submit" name="edit" class="btn" value="Confirm" />
+                            <input type="submit" name="create" class="btn" value="Create" />
                         </div>
                     </form>
                 </div>
+
+                <?php if(isset($_POST['create'])): ?>
+                    <?php echo $perms->Fetch(array(
+                        // General AdminCP
+                        'login'       => isset($_POST['login_access']) ? $_POST['login_access'] : "0",
+
+                        // News System
+                        'news_view'   => isset($_POST['news_access']) ? $_POST['news_access'] : "0",
+                        'news_post'   => isset($_POST['news_post']) ? $_POST['news_post'] : "0",
+                        'news_edit'   => isset($_POST['news_edit']) ? $_POST['news_edit'] : "0",
+                        'news_delete' => isset($_POST['news_delete']) ? $_POST['news_delete'] : "0",
+
+                        // User System
+                        'user_view'   => isset($_POST['user_access']) ? $_POST['user_access'] : "0",
+                        'user_create' => isset($_POST['user_create']) ? $_POST['user_create'] : "0",
+                        'user_reset'  => isset($_POST['user_reset']) ? $_POST['user_reset'] : "0",
+                        'user_edit'   => isset($_POST['user_edit']) ? $_POST['user_edit'] : "0",
+                        'user_ban'    => isset($_POST['user_ban']) ? $_POST['user_ban'] : "0",
+                        'user_delete' => isset($_POST['user_delete']) ? $_POST['user_delete'] : "0",
+                    )); ?>
+                <?php endif; ?>
             <?php elseif(isset($_GET['edit']) && $user->Exist($_GET['edit'])): ?>
 
             <?php elseif(isset($_GET['delid']) && $user->Exist($_GET['delid'])): ?>
