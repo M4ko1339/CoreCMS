@@ -127,24 +127,39 @@ $array = $perms->Get('test');
                 </div>
 
                 <?php if(isset($_POST['create'])): ?>
-                    <?php echo $perms->Fetch(array(
-                        // General AdminCP
-                        'login'       => isset($_POST['login_access']) ? $_POST['login_access'] : "0",
+                    <?php if(!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword'])): ?>
+                        <?php if(!$user->Duplicate($_POST['username'], $_POST['email'])): ?>
+                            <?php $user->Create($_POST['username'], $_POST['password'], $_POST['email'], $perms->Fetch(array(
+                                // General AdminCP
+                                'login'       => isset($_POST['login_access']) ? $_POST['login_access'] : "0",
 
-                        // News System
-                        'news_view'   => isset($_POST['news_access']) ? $_POST['news_access'] : "0",
-                        'news_post'   => isset($_POST['news_post']) ? $_POST['news_post'] : "0",
-                        'news_edit'   => isset($_POST['news_edit']) ? $_POST['news_edit'] : "0",
-                        'news_delete' => isset($_POST['news_delete']) ? $_POST['news_delete'] : "0",
+                                // News System
+                                'news_view'   => isset($_POST['news_access']) ? $_POST['news_access'] : "0",
+                                'news_post'   => isset($_POST['news_post']) ? $_POST['news_post'] : "0",
+                                'news_edit'   => isset($_POST['news_edit']) ? $_POST['news_edit'] : "0",
+                                'news_delete' => isset($_POST['news_delete']) ? $_POST['news_delete'] : "0",
 
-                        // User System
-                        'user_view'   => isset($_POST['user_access']) ? $_POST['user_access'] : "0",
-                        'user_create' => isset($_POST['user_create']) ? $_POST['user_create'] : "0",
-                        'user_reset'  => isset($_POST['user_reset']) ? $_POST['user_reset'] : "0",
-                        'user_edit'   => isset($_POST['user_edit']) ? $_POST['user_edit'] : "0",
-                        'user_ban'    => isset($_POST['user_ban']) ? $_POST['user_ban'] : "0",
-                        'user_delete' => isset($_POST['user_delete']) ? $_POST['user_delete'] : "0",
-                    )); ?>
+                                // User System
+                                'user_view'   => isset($_POST['user_access']) ? $_POST['user_access'] : "0",
+                                'user_create' => isset($_POST['user_create']) ? $_POST['user_create'] : "0",
+                                'user_reset'  => isset($_POST['user_reset']) ? $_POST['user_reset'] : "0",
+                                'user_edit'   => isset($_POST['user_edit']) ? $_POST['user_edit'] : "0",
+                                'user_ban'    => isset($_POST['user_ban']) ? $_POST['user_ban'] : "0",
+                                'user_delete' => isset($_POST['user_delete']) ? $_POST['user_delete'] : "0",
+                            ))); ?>
+                            <div class="response col s12 green">
+                                User has been created!
+                            </div>
+                        <?php else: ?>
+                            <div class="response col s12 red">
+                                Username or Email already exists!
+                            </div>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <div class="response col s12 red">
+                            Please fill in all fields!
+                        </div>
+                    <?php endif; ?>
                 <?php endif; ?>
             <?php elseif(isset($_GET['edit']) && $user->Exist($_GET['edit'])): ?>
 
