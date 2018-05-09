@@ -329,7 +329,7 @@ Class Permissions
     {
         global $con;
 
-        $data = $con->prepare('SELECT * FROM users WHERE username = :username');
+        $data = $con->prepare('SELECT permissions FROM users WHERE username = :username');
         $data->execute(array(
             ':username' => $username
         ));
