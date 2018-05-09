@@ -249,7 +249,27 @@ Class User
 
     public function Register()
     {
+        global $con;
+    }
 
+    public function Edit($email, $permissions)
+    {
+        $data = $con->prepare('UPDATE users SET email = :email, permissions = :perms WHERE id = :id');
+        $data->execute(array(
+            ':email'   => $email,
+            ':perms'   => $permissions,
+            ':id'      => (int)$id
+        ));
+    }
+
+    public function Delete($id)
+    {
+        global $con;
+
+        $data = $con->prepare('DELETE FROM users WHERE id = :id');
+        $data->execute(array(
+            ':id' => (int)$id
+        ));
     }
 
     public function Logout()
