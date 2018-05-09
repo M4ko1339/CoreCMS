@@ -252,8 +252,10 @@ Class User
         global $con;
     }
 
-    public function Edit($email, $permissions)
+    public function Edit($id, $email, $permissions)
     {
+        global $con;
+
         $data = $con->prepare('UPDATE users SET email = :email, permissions = :perms WHERE id = :id');
         $data->execute(array(
             ':email'   => $email,
@@ -372,13 +374,13 @@ Class Permissions
         return json_encode($value);
     }
 
-    public function Get($username)
+    public function Get($id)
     {
         global $con;
 
-        $data = $con->prepare('SELECT permissions FROM users WHERE username = :username');
+        $data = $con->prepare('SELECT permissions FROM users WHERE id = :id');
         $data->execute(array(
-            ':username' => $username
+            ':id' => $id
         ));
 
         $result = $data->fetchAll(PDO::FETCH_ASSOC);
