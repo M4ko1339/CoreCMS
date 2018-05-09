@@ -78,7 +78,7 @@ input:not([type]):focus, input[type=text]:not(.browser-default):focus, input[typ
     border-color: #449C47;
 }
 
-input[type="text"], input[type="password"], option
+input[type="text"], input[type="password"], option, textarea
 {
     color: #DDD;
 }
