@@ -6,6 +6,7 @@ include('inc/db.php');
 include('inc/functions.php');
 
 $user  = new User();
+$perms = new Permissions();
 
 if($user->Authenticated())
 {
@@ -60,17 +61,23 @@ if($user->Authenticated())
 
                 <?php if(isset($_POST['login'])): ?>
                     <?php if(!empty($_POST['username']) && !empty($_POST['password'])): ?>
-                        <?php if($user->Login($_POST['username'], $_POST['password'] . $user->Salt($_POST['username']))): ?>
-                            <?php
-                                $_SESSION['username'] = $_POST['username'];
-                                $_SESSION['password'] = sha1($_POST['password'] . $user->Salt($_POST['username']));
+                        <?php if($perms->Access($_POST['username'], 'login')): ?>
+                            <?php if($user->Login($_POST['username'], $_POST['password'] . $user->Salt($_POST['username']))): ?>
+                                <?php
+                                    $_SESSION['username'] = $_POST['username'];
+                                    $_SESSION['password'] = sha1($_POST['password'] . $user->Salt($_POST['username']));
 
-                                header('Location: index.php');
-                                exit;
-                            ?>
+                                    header('Location: index.php');
+                                    exit;
+                                ?>
+                            <?php else: ?>
+                                <div class="response red">
+                                    Username or password was incorrect!
+                                </div>
+                            <?php endif; ?>
                         <?php else: ?>
                             <div class="response red">
-                                Username or password was incorrect!
+                                You do not have access!
                             </div>
                         <?php endif; ?>
                     <?php else: ?>
@@ -85,6 +92,6 @@ if($user->Authenticated())
 
     <!-- JS -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/materialize.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
 </html>
