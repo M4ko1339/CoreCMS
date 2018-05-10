@@ -46,9 +46,17 @@ $perms  = new Permissions();
             <div class="menu col m8">
                 <ul>
                     <li><a href="index.php" <?php echo (basename($_SERVER["PHP_SELF"]) == "index.php" || "")?"class=\"current-nav\"":""; ?>><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                    <li><a href="news.php"  <?php echo (basename($_SERVER["PHP_SELF"]) == "news.php")?"class=\"current-nav\"":""; ?>><i class="far fa-newspaper"></i> News</a></li>
-                    <li><a href="users.php" <?php echo (basename($_SERVER["PHP_SELF"]) == "users.php")?"class=\"current-nav\"":""; ?>><i class="fas fa-users"></i> Users</a></li>
+
+                    <?php if($perms->Access($_SESSION['username'], 'news_view')): ?>
+                        <li><a href="news.php"  <?php echo (basename($_SERVER["PHP_SELF"]) == "news.php")?"class=\"current-nav\"":""; ?>><i class="far fa-newspaper"></i> News</a></li>
+                    <?php endif; ?>
+
+                    <?php if($perms->Access($_SESSION['username'], 'user_view')): ?>
+                        <li><a href="users.php" <?php echo (basename($_SERVER["PHP_SELF"]) == "users.php")?"class=\"current-nav\"":""; ?>><i class="fas fa-users"></i> Users</a></li>
+                    <?php endif; ?>
+
                     <li><a href="?logout=true" class="logout"><i class="fas fa-power-off"></i> Logout</a></li>
+
                     <?php
 
                     if(isset($_GET['logout']) && $_GET['logout'] == 'true')
