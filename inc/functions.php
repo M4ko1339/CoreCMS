@@ -503,15 +503,16 @@ Class Sanitize
 
 Class Logging
 {
-    public function Error()
+    public function Error($data)
     {
         global $con;
 
-        $data = $con->prepare('INSERT INTO error_logs (error_type, error_message, error_time) VALUES(:type, :error_msg, :error_time)');
+        $data = $con->prepare('INSERT INTO logs (type, data, ip_address, log_date) VALUES(:type, :data, :ip, :logdate)');
         $data->execute(array(
-            ':type'        => $type,
-            ':error_msg'   => $error,
-            ':error_ time' => time()
+            ':type'    => 1,
+            ':data'    => $data,
+            ':ip'      => $_SERVER['REMOTE_ADDR'],
+            ':logdate' => time()
         ));
     }
 }
