@@ -4,6 +4,12 @@ include('header.php');
 
 $news = new News();
 
+if(!$perms->Access($_SESSION['username'], 'news_view'))
+{
+    header('Location: index.php');
+    exit;
+}
+
 ?>
 
 <div class="container">
@@ -21,7 +27,7 @@ $news = new News();
         </div>
 
         <div class="content col s12">
-            <?php if(isset($_GET['action']) && $_GET['action'] == "newpost"): ?>
+            <?php if(isset($_GET['action']) && $_GET['action'] == "newpost" && $perms->Access($_SESSION['username'], 'news_post')): ?>
                 <div class="content-header col s12">
                     Create a new post
                 </div>
@@ -44,7 +50,7 @@ $news = new News();
                     </form>
                 </div>
 
-                <?php if(isset($_POST['post'])): ?>
+                <?php if(isset($_POST['post']) && $perms->Access($_SESSION['username'], 'news_post')): ?>
                     <?php if(!empty($_POST['title']) && !empty($_POST['content'])): ?>
                         <?php if(!$news->Duplicate($_POST['title'])): ?>
                             <?php $news->Create($_POST['title'], $_SESSION['username'], $_POST['content']); ?>
@@ -62,7 +68,7 @@ $news = new News();
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>
-            <?php elseif(isset($_GET['edit']) && $news->Exist((int)$_GET['edit'])): ?>
+            <?php elseif(isset($_GET['edit']) && $news->Exist((int)$_GET['edit']) && $perms->Access($_SESSION['username'], 'news_edit')): ?>
                 <?php foreach($news->View((int)$_GET['edit']) as $row): ?>
                     <div class="content-header col s12">
                         Modifying post: <span class="green-text"><?php echo $row['title']; ?></span>
@@ -87,7 +93,7 @@ $news = new News();
                     </div>
                 <?php endforeach; ?>
 
-                <?php if(isset($_POST['edit'])): ?>
+                <?php if(isset($_POST['edit']) && $perms->Access($_SESSION['username'], 'news_edit')): ?>
                     <?php if(!empty($_POST['title']) && !empty($_POST['content'])): ?>
                         <?php $news->Edit((int)$_GET['edit'], $_POST['title'], $_SESSION['username'], $_POST['content']); ?>
                         <div class="response col s12 green">
@@ -120,8 +126,13 @@ $news = new News();
                             <td><?php echo ucfirst($row['author']); ?></td>
                             <td><?php echo str_replace("<br>", " ", substr($row['content'], 0, 30)); ?>..</td>
                             <td><?php echo date('j. F, Y', $row['post_date']); ?></td>
-                            <td><a href="?edit=<?php echo $row['id']; ?>"><i class="far fa-edit green-text"></i></a></td>
-                            <td class="right"><a href="?delid=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure?');"><i class="fas fa-trash red-text"></i></a></td>
+                            <?php if($perms->Access($_SESSION['username'], 'news_edit')): ?>
+                                <td><a href="?edit=<?php echo $row['id']; ?>"><i class="far fa-edit green-text"></i></a></td>
+                            <?php endif; ?>
+
+                            <?php if($perms->Access($_SESSION['username'], 'news_delete')): ?>
+                                <td class="right"><a href="?delid=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure?');"><i class="fas fa-trash red-text"></i></a></td>
+                            <?php endif; ?>
                         </tr>
                     <?php endforeach; ?>
                 </table>

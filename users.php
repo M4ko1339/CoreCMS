@@ -3,7 +3,12 @@
 include('header.php');
 
 $user  = new User();
-$perms = new Permissions();
+
+if(!$perms->Access($_SESSION['username'], 'user_view'))
+{
+    header('Location: index.php');
+    exit;
+}
 
 $permissions = array(
     // General AdminCP
@@ -33,12 +38,14 @@ $permissions = array(
                 <?php if(isset($_GET['edit']) || isset($_GET['action'])): ?>
                     <a href="users.php" class="btn back-button"><i class="fas fa-chevron-left"></i></a>
                 <?php endif; ?>
-                <a href="?action=newuser" class="btn">New User</a>
+                <?php if($perms->Access($_SESSION['username'], 'user_create')): ?>
+                    <a href="?action=newuser" class="btn">New User</a>
+                <?php endif; ?>
             </div>
         </div>
 
         <div class="content col s12">
-            <?php if(isset($_GET['action']) && $_GET['action'] == "newuser"): ?>
+            <?php if(isset($_GET['action']) && $_GET['action'] == "newuser" && $perms->Access($_SESSION['username'], 'user_create')): ?>
                 <div class="content-header col s12">
                     Create a new user
                 </div>
@@ -143,7 +150,7 @@ $permissions = array(
                     </form>
                 </div>
 
-                <?php if(isset($_POST['create'])): ?>
+                <?php if(isset($_POST['create']) && $perms->Access($_SESSION['username'], 'user_create')): ?>
                     <?php if(!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repassword'])): ?>
                         <?php if(!$user->Duplicate($_POST['username'], $_POST['email'])): ?>
                             <?php $user->Create($_POST['username'], $_POST['password'], $_POST['email'], $perms->Fetch($permissions)); ?>
@@ -161,7 +168,7 @@ $permissions = array(
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>
-            <?php elseif(isset($_GET['edit']) && $user->Exist($_GET['edit'])): ?>
+            <?php elseif(isset($_GET['edit']) && $user->Exist($_GET['edit']) && $perms->Access($_SESSION['username'], 'user_edit')): ?>
                 <?php
                     $access = $perms->Get((int)$_GET['edit']);
                     foreach($user->View((int)$_GET['edit']) as $row)
@@ -258,7 +265,7 @@ $permissions = array(
                     </form>
                 </div>
 
-                <?php if(isset($_POST['edit'])): ?>
+                <?php if(isset($_POST['edit']) && $perms->Access($_SESSION['username'], 'user_edit')): ?>
                     <?php if(!empty($_POST['email'])): ?>
                         <?php $user->Edit((int)$_GET['edit'], $_POST['email'], $perms->Fetch($permissions)); ?>
                         <div class="response col s12 green">
@@ -270,7 +277,7 @@ $permissions = array(
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>
-            <?php elseif(isset($_GET['delid']) && $user->Exist($_GET['delid'])): ?>
+            <?php elseif(isset($_GET['delid']) && $user->Exist($_GET['delid']) && $perms->Access($_SESSION['username'], 'user_delete')): ?>
                 <?php
                     $user->Delete((int)$_GET['delid']);
                     header('Location: users.php');
@@ -291,8 +298,13 @@ $permissions = array(
                             <td><?php echo $row['email']; ?></td>
                             <td><?php   ?></td>
                             <td><?php  ?></td>
-                            <td><a href="?edit=<?php echo $row['id']; ?>"><i class="far fa-edit green-text"></i></a></td>
-                            <td class="right"><a href="?delid=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure?');"><i class="fas fa-trash red-text"></i></a></td>
+                            <?php if($perms->Access($_SESSION['username'], 'user_edit')): ?>
+                                <td><a href="?edit=<?php echo $row['id']; ?>"><i class="far fa-edit green-text"></i></a></td>
+                            <?php endif; ?>
+
+                            <?php if($perms->Access($_SESSION['username'], 'user_delete')): ?>
+                                <td class="right"><a href="?delid=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure?');"><i class="fas fa-trash red-text"></i></a></td>
+                            <?php endif; ?>
                         </tr>
                     <?php endforeach; ?>
                 </table>
