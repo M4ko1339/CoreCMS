@@ -55,6 +55,8 @@ $perms  = new Permissions();
                         <li><a href="users.php" <?php echo (basename($_SERVER["PHP_SELF"]) == "users.php")?"class=\"current-nav\"":""; ?>><i class="fas fa-users"></i> Users</a></li>
                     <?php endif; ?>
 
+                    <li><a href="transactions.php" <?php echo (basename($_SERVER["PHP_SELF"]) == "transactions.php")?"class=\"current-nav\"":""; ?>><i class="fas fa-credit-card"></i> Transactions</a></li>
+
                     <li><a href="?logout=true" class="logout"><i class="fas fa-power-off"></i> Logout</a></li>
 
                     <?php
