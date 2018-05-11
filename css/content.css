@@ -164,3 +164,16 @@ legend
     font-size: 0.8rem;
     padding: 10px;
 }
+
+.info-box
+{
+    padding: 10px 0px 10px 0px;
+}
+
+.info-box-text
+{
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 0.9rem;
+}
