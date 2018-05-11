@@ -2,7 +2,7 @@
 
 include('header.php');
 
-$user  = new User();
+$user = new User();
 
 if(!$perms->Access($_SESSION['username'], 'user_view'))
 {
@@ -27,6 +27,13 @@ $permissions = array(
     'user_edit'   => isset($_POST['user_edit']) ? $_POST['user_edit'] : "0",
     'user_ban'    => isset($_POST['user_ban']) ? $_POST['user_ban'] : "0",
     'user_delete' => isset($_POST['user_delete']) ? $_POST['user_delete'] : "0",
+
+    // Notification System
+    'notify_view'   => isset($_POST['notify_access']) ? $_POST['notify_access'] : "0",
+    'notify_create' => isset($_POST['notify_create']) ? $_POST['notify_create'] : "0",
+    'notify_toggle' => isset($_POST['notify_toggle']) ? $_POST['notify_toggle'] : "0",
+    'notify_edit'   => isset($_POST['notify_edit']) ? $_POST['notify_edit'] : "0",
+    'notify_delete' => isset($_POST['notify_delete']) ? $_POST['notify_delete'] : "0",
 );
 
 ?>
@@ -142,6 +149,36 @@ $permissions = array(
                                     </label>
                                 </p>
                             </fieldset>
+
+                            <fieldset>
+                                <legend>Notification Permissions</legend>
+                                <p>
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="notify_access" value="1" />
+                                        <span>View Notifications</span>
+                                    </label>
+
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="notify_create" value="1" />
+                                        <span>Create Notifications</span>
+                                    </label>
+
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="notify_toggle" value="1" />
+                                        <span>Toggle Notifications</span>
+                                    </label>
+
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="notify_edit" value="1" />
+                                        <span>Edit Notifications</span>
+                                    </label>
+
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="notify_delete" value="1" />
+                                        <span>Delete Notifications</span>
+                                    </label>
+                                </p>
+                            </fieldset>
                         </div>
 
                         <div class="input-field col s12">
@@ -254,6 +291,36 @@ $permissions = array(
                                     <label>
                                         <input type="checkbox" class="filled-in" name="user_delete" <?php echo ($access['user_delete'] ? "checked":""); ?> value="1" />
                                         <span>Delete Users</span>
+                                    </label>
+                                </p>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>Notification Permissions</legend>
+                                <p>
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="notify_access" <?php echo ($access['notify_view'] ? "checked":""); ?> value="1" />
+                                        <span>View Notifications</span>
+                                    </label>
+
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="notify_create" <?php echo ($access['notify_create'] ? "checked":""); ?> value="1" />
+                                        <span>Create Notifications</span>
+                                    </label>
+
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="notify_toggle" <?php echo ($access['notify_toggle'] ? "checked":""); ?> value="1" />
+                                        <span>Toggle Notifications</span>
+                                    </label>
+
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="notify_edit" <?php echo ($access['notify_edit'] ? "checked":""); ?> value="1" />
+                                        <span>Edit Notifications</span>
+                                    </label>
+
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="notify_delete" <?php echo ($access['notify_delete'] ? "checked":""); ?> value="1" />
+                                        <span>Delete Notifications</span>
                                     </label>
                                 </p>
                             </fieldset>
