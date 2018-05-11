@@ -394,6 +394,28 @@ Class Permissions
 
 Class Notification
 {
+    public function Show()
+    {
+        global $con;
+
+        $data = $con->prepare('SELECT * FROM notifications ORDER BY id DESC');
+        $data->execute();
+
+        return $data->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function View($id)
+    {
+        global $con;
+
+        $data = $con->prepare('SELECT * FROM notifications WHERE id = :id');
+        $data->execute(array(
+            ':id' => $id
+        ));
+
+        return $data->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function Create($type, $message)
     {
         global $con;
