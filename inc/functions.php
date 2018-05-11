@@ -416,6 +416,23 @@ Class Notification
         return $data->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function Exist($id)
+    {
+        global $con;
+
+        $data = $con->prepare('SELECT COUNT(*) FROM notifications WHERE id = :id');
+        $data->execute(array(
+            ':id' => (int)$id
+        ));
+
+        if($data->fetchColumn() == 1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public function Create($type, $message)
     {
         global $con;
