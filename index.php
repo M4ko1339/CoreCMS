@@ -18,222 +18,228 @@ include('header.php');
             </div>
         </div>
 
-        <?php if(isset($_GET['action']) && $_GET['action'] == "newnotification" && $perms->Access($_SESSION['username'], 'notify_create')): ?>
-            <div class="content col s12">
-                <div class="content-header col s12">
-                    Create a new notification
+        <?php if($perms->Access($_SESSION['username'], 'notify_view')): ?>
+            <?php if(isset($_GET['action']) && $_GET['action'] == "newnotification" && $perms->Access($_SESSION['username'], 'notify_create')): ?>
+                <div class="content col s12">
+                    <div class="content-header col s12">
+                        Create a new notification
+                    </div>
+
+                    <div class="content-box col s12">
+                        <form method="POST">
+                            <div class="input-field col s12">
+                                <label>Color</label>
+                                <br>
+                                <p>
+                                    <label>
+                                        <input class="with-gap" type="radio" name="color" value="green" />
+                                        <span>Green</span>
+                                    </label>
+
+                                    <label>
+                                        <input class="with-gap" type="radio" name="color" value="orange" />
+                                        <span>Orange</span>
+                                    </label>
+
+                                    <label>
+                                        <input class="with-gap" type="radio" name="color" value="red" />
+                                        <span>Red</span>
+                                    </label>
+                                </p>
+                            </div>
+
+                            <div class="input-field col s12">
+                                <label>Message</label>
+                                <input type="text" name="message" />
+                            </div>
+
+                            <div class="input-field col s12">
+                                <input type="submit" name="create" class="btn" value="Create" />
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
-                <div class="content-box col s12">
-                    <form method="POST">
-                        <div class="input-field col s12">
-                            <label>Color</label>
-                            <br>
-                            <p>
-                                <label>
-                                    <input class="with-gap" type="radio" name="color" value="green" />
-                                    <span>Green</span>
-                                </label>
-
-                                <label>
-                                    <input class="with-gap" type="radio" name="color" value="orange" />
-                                    <span>Orange</span>
-                                </label>
-
-                                <label>
-                                    <input class="with-gap" type="radio" name="color" value="red" />
-                                    <span>Red</span>
-                                </label>
-                            </p>
+                <?php if(isset($_POST['create']) && $perms->Access($_SESSION['username'], 'notify_create')): ?>
+                    <?php if(!empty($_POST['message'])): ?>
+                        <?php $notify->Create($_POST['color'], $_POST['message']); ?>
+                        <div class="response col s12 green">
+                            Successfully created notification!
                         </div>
-
-                        <div class="input-field col s12">
-                            <label>Message</label>
-                            <input type="text" name="message" />
+                    <?php else: ?>
+                        <div class="response col s12 red">
+                            Please fill in all fields!
                         </div>
-
-                        <div class="input-field col s12">
-                            <input type="submit" name="create" class="btn" value="Create" />
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <?php if(isset($_POST['create']) && $perms->Access($_SESSION['username'], 'notify_create')): ?>
-                <?php if(!empty($_POST['message'])): ?>
-                    <?php $notify->Create($_POST['color'], $_POST['message']); ?>
-                    <div class="response col s12 green">
-                        Successfully created notification!
-                    </div>
-                <?php else: ?>
-                    <div class="response col s12 red">
-                        Please fill in all fields!
-                    </div>
+                    <?php endif; ?>
                 <?php endif; ?>
-            <?php endif; ?>
-        <?php elseif(isset($_GET['toggle']) && $notify->Exist((int)$_GET['toggle']) && $perms->Access($_SESSION['username'], 'notify_toggle')): ?>
-            <?php
+            <?php elseif(isset($_GET['toggle']) && $notify->Exist((int)$_GET['toggle']) && $perms->Access($_SESSION['username'], 'notify_toggle')): ?>
+                <?php
 
-            $notify->Toggle($_GET['toggle']);
-            header('Location: index.php');
-            exit;
-
-            ?>
-        <?php elseif(isset($_GET['edit']) && $notify->Exist((int)$_GET['edit']) && $perms->Access($_SESSION['username'], 'notify_edit')): ?>
-            <?php foreach($notify->View((int)$_GET['edit']) as $row): ?>
-                <div class="content-header col s12">
-                    Modifying notification
-                </div>
-
-                <div class="content-box col s12">
-                    <form method="POST">
-                        <div class="input-field col s12">
-                            <label>Color</label>
-                            <br>
-                            <p>
-                                <label>
-                                    <input class="with-gap" type="radio" name="color" value="green" <?php echo ($row['type'] == "green") ? "checked" : ""; ?> />
-                                    <span>Green</span>
-                                </label>
-
-                                <label>
-                                    <input class="with-gap" type="radio" name="color" value="orange" <?php echo ($row['type'] == "orange") ? "checked" : ""; ?> />
-                                    <span>Orange</span>
-                                </label>
-
-                                <label>
-                                    <input class="with-gap" type="radio" name="color" value="red" <?php echo ($row['type'] == "red") ? "checked" : ""; ?> />
-                                    <span>Red</span>
-                                </label>
-                            </p>
-                        </div>
-
-                        <div class="input-field col s12">
-                            <label>Message</label>
-                            <input type="text" name="message" value="<?php echo $row['message']; ?>" />
-                        </div>
-
-                        <div class="input-field col s12">
-                            <input type="submit" name="edit" class="btn" value="Confirm" />
-                        </div>
-                    </form>
-                </div>
-            <?php endforeach; ?>
-
-            <?php if(isset($_POST['edit']) && $perms->Access($_SESSION['username'], 'notify_edit')): ?>
-                <?php if(!empty($_POST['message'])): ?>
-                    <?php $notify->Edit((int)$_GET['edit'], $_POST['color'], $_POST['message']); ?>
-                    <div class="response col s12 green">
-                        Successfully modified notification!
-                    </div>
-                <?php else: ?>
-                    <div class="response col s12 red">
-                        Please fill in all fields!
-                    </div>
-                <?php endif; ?>
-            <?php endif; ?>
-        <?php elseif(isset($_GET['delid']) && $notify->Exist((int)$_GET['delid']) && $perms->Access($_SESSION['username'], 'notify_delete')): ?>
-            <?php
-                $notify->Delete((int)$_GET['delid']);
+                $notify->Toggle($_GET['toggle']);
                 header('Location: index.php');
                 exit;
-            ?>
+
+                ?>
+            <?php elseif(isset($_GET['edit']) && $notify->Exist((int)$_GET['edit']) && $perms->Access($_SESSION['username'], 'notify_edit')): ?>
+                <?php foreach($notify->View((int)$_GET['edit']) as $row): ?>
+                    <div class="content-header col s12">
+                        Modifying notification
+                    </div>
+
+                    <div class="content-box col s12">
+                        <form method="POST">
+                            <div class="input-field col s12">
+                                <label>Color</label>
+                                <br>
+                                <p>
+                                    <label>
+                                        <input class="with-gap" type="radio" name="color" value="green" <?php echo ($row['type'] == "green") ? "checked" : ""; ?> />
+                                        <span>Green</span>
+                                    </label>
+
+                                    <label>
+                                        <input class="with-gap" type="radio" name="color" value="orange" <?php echo ($row['type'] == "orange") ? "checked" : ""; ?> />
+                                        <span>Orange</span>
+                                    </label>
+
+                                    <label>
+                                        <input class="with-gap" type="radio" name="color" value="red" <?php echo ($row['type'] == "red") ? "checked" : ""; ?> />
+                                        <span>Red</span>
+                                    </label>
+                                </p>
+                            </div>
+
+                            <div class="input-field col s12">
+                                <label>Message</label>
+                                <input type="text" name="message" value="<?php echo $row['message']; ?>" />
+                            </div>
+
+                            <div class="input-field col s12">
+                                <input type="submit" name="edit" class="btn" value="Confirm" />
+                            </div>
+                        </form>
+                    </div>
+                <?php endforeach; ?>
+
+                <?php if(isset($_POST['edit']) && $perms->Access($_SESSION['username'], 'notify_edit')): ?>
+                    <?php if(!empty($_POST['message'])): ?>
+                        <?php $notify->Edit((int)$_GET['edit'], $_POST['color'], $_POST['message']); ?>
+                        <div class="response col s12 green">
+                            Successfully modified notification!
+                        </div>
+                    <?php else: ?>
+                        <div class="response col s12 red">
+                            Please fill in all fields!
+                        </div>
+                    <?php endif; ?>
+                <?php endif; ?>
+            <?php elseif(isset($_GET['delid']) && $notify->Exist((int)$_GET['delid']) && $perms->Access($_SESSION['username'], 'notify_delete')): ?>
+                <?php
+                    $notify->Delete((int)$_GET['delid']);
+                    header('Location: index.php');
+                    exit;
+                ?>
+            <?php else: ?>
+                <div class="content col s12 m9">
+                    <table>
+                        <th>Color</th>
+                        <th>Message</th>
+                        <th>Status</th>
+                        <th></th>
+                        <th></th>
+                        <th class="right"></th>
+
+                        <?php foreach($notify->Show() as $row): ?>
+                            <tr>
+                                <td><?php echo ucfirst(strtolower($row['type'])); ?></td>
+                                <td><?php echo $row['message']; ?></td>
+                                <td><?php echo ($row['active']) ? "<span class='green-text'>Active</span>" : "<span class='red-text'>Inactive</span>"; ?></td>
+
+                                <?php if($perms->Access($_SESSION['username'], 'notify_toggle')): ?>
+                                    <td><a href="?toggle=<?php echo $row['id']; ?>"><i <?php echo ($row['active']) ? 'class="fas fa-toggle-on blue-text"' : 'class="fas fa-toggle-off blue-text"'; ?>></i></a></td>
+                                <?php endif; ?>
+
+                                <?php if($perms->Access($_SESSION['username'], 'notify_edit')): ?>
+                                    <td><a href="?edit=<?php echo $row['id']; ?>"><i class="far fa-edit green-text"></i></a></td>
+                                <?php endif; ?>
+
+                                <?php if($perms->Access($_SESSION['username'], 'notify_delete')): ?>
+                                    <td class="right"><a href="?delid=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure?');"><i class="fas fa-trash red-text"></i></a></td>
+                                <?php endif; ?>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+
+                <div class="content col s12 m3">
+                    <div class="content-box col s12">
+                        <?php foreach($user->Info($_SESSION['username']) as $row): ?>
+                            <div class="info-box">
+                                <label>Username</label>
+                                <div class="info-box-text">
+                                    <?php echo ucfirst($row['username']); ?>
+                                </div>
+                            </div>
+
+                            <div class="info-box">
+                                <label>Email</label>
+                                <div class="info-box-text">
+                                    <?php echo $row['email']; ?>
+                                </div>
+                            </div>
+
+                            <div class="info-box">
+                                <label>Last IP</label>
+                                <div class="info-box-text">
+                                    <?php echo $row['last_ip']; ?>
+                                </div>
+                            </div>
+
+                            <div class="info-box">
+                                <label>Last Login</label>
+                                <div class="info-box-text">
+                                    <?php echo date('H:i - j. F, Y', $row['last_login']); ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
         <?php else: ?>
-            <div class="content col s12 m9">
-                <table>
-                    <th>Color</th>
-                    <th>Message</th>
-                    <th>Status</th>
-                    <th></th>
-                    <th></th>
-                    <th class="right"></th>
-
-                    <?php foreach($notify->Show() as $row): ?>
-                        <tr>
-                            <td><?php echo ucfirst(strtolower($row['type'])); ?></td>
-                            <td><?php echo $row['message']; ?></td>
-                            <td><?php echo ($row['active']) ? "<span class='green-text'>Active</span>" : "<span class='red-text'>Inactive</span>"; ?></td>
-
-                            <?php if($perms->Access($_SESSION['username'], 'notify_toggle')): ?>
-                                <td><a href="?toggle=<?php echo $row['id']; ?>"><i <?php echo ($row['active']) ? 'class="fas fa-toggle-on blue-text"' : 'class="fas fa-toggle-off blue-text"'; ?>></i></a></td>
-                            <?php endif; ?>
-
-                            <?php if($perms->Access($_SESSION['username'], 'notify_edit')): ?>
-                                <td><a href="?edit=<?php echo $row['id']; ?>"><i class="far fa-edit green-text"></i></a></td>
-                            <?php endif; ?>
-
-                            <?php if($perms->Access($_SESSION['username'], 'notify_delete')): ?>
-                                <td class="right"><a href="?delid=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure?');"><i class="fas fa-trash red-text"></i></a></td>
-                            <?php endif; ?>
-                        </tr>
-                    <?php endforeach; ?>
-                </table>
-            </div>
-
             <div class="content col s12 m3">
                 <div class="content-box col s12">
-                    <div class="info-box">
-                        <label>Username</label>
-                        <div class="info-box-text">
-                            Admin
+                    <?php foreach($user->Info($_SESSION['username']) as $row): ?>
+                        <div class="info-box">
+                            <label>Username</label>
+                            <div class="info-box-text">
+                                <?php echo ucfirst($row['username']); ?>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="info-box">
-                        <label>Email</label>
-                        <div class="info-box-text">
-                            admin@corecms.com
+                        <div class="info-box">
+                            <label>Email</label>
+                            <div class="info-box-text">
+                                <?php echo $row['email']; ?>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="info-box">
-                        <label>Last IP</label>
-                        <div class="info-box-text">
-                            127.0.0.1
+                        <div class="info-box">
+                            <label>Last IP</label>
+                            <div class="info-box-text">
+                                <?php echo $row['last_ip']; ?>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="info-box">
-                        <label>Last Login</label>
-                        <div class="info-box-text">
-                            10:20 - 11.05.2018
+                        <div class="info-box">
+                            <label>Last Login</label>
+                            <div class="info-box-text">
+                                <?php echo date('H:i - j. F, Y', $row['last_login']); ?>
+                            </div>
                         </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         <?php endif; ?>
-
-        <div class="content col s12 m3">
-            <div class="content-box col s12">
-                <div class="info-box">
-                    <label>Username</label>
-                    <div class="info-box-text">
-                        Admin
-                    </div>
-                </div>
-
-                <div class="info-box">
-                    <label>Email</label>
-                    <div class="info-box-text">
-                        admin@corecms.com
-                    </div>
-                </div>
-
-                <div class="info-box">
-                    <label>Last IP</label>
-                    <div class="info-box-text">
-                        127.0.0.1
-                    </div>
-                </div>
-
-                <div class="info-box">
-                    <label>Last Login</label>
-                    <div class="info-box-text">
-                        10:20 - 11.05.2018
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 

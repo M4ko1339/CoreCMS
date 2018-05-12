@@ -121,6 +121,18 @@ Class User
         return $data->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function Info($username)
+    {
+        global $con;
+
+        $data = $con->prepare('SELECT * FROM users WHERE username = :username');
+        $data->execute(array(
+            ':username' => $username
+        ));
+
+        return $data->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function Exist($id)
     {
         global $con;
@@ -484,6 +496,16 @@ Class Notification
             ':color'   => $type,
             ':message' => $message,
             ':id'      => (int)$id
+        ));
+    }
+
+    public function Delete($id)
+    {
+        global $con;
+
+        $data = $con->prepare('DELETE FROM notifications WHERE id = :id');
+        $data->execute(array(
+            ':id' => (int)$id
         ));
     }
 
