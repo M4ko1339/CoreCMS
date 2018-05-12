@@ -264,6 +264,33 @@ Class User
         global $con;
     }
 
+    public function ChangePassword($username, $oldpassword, $newpassword)
+    {
+        global $con;
+
+        $data = $con->prepare('SELECT COUNT(*) FROM users WHERE username = :username AND password = :password');
+        $data->execute(array(
+            ':username' => $username,
+            ':password' => $oldpassword
+        ));
+
+        if($data->fetchColumn() == 1)
+        {
+            $salt = uniqid();
+
+            $data = $con->prepare('UPDATE users SET password = :password, salt = :salt WHERE username = :username');
+            $data->execute(array(
+                ':password' => sha1($newpassword . $salt),
+                ':salt'     => $salt,
+                ':username' => $username
+            ));
+
+            return true;
+        }
+
+        return false;
+    }
+
     public function Edit($id, $email, $permissions)
     {
         global $con;
@@ -584,11 +611,27 @@ Class Logging
     public function Attack($data)
     {
         global $con;
+
+        $data = $con->prepare('INSERT INTO logs (type, data, ip_address, log_date) VALUES(:type, :data, :ip, :logdate)');
+        $data->execute(array(
+            ':type'    => 3,
+            ':data'    => $data,
+            ':ip'      => $_SERVER['REMOTE_ADDR'],
+            ':logdate' => time()
+        ));
     }
 
-    public function Logins($data)
+    public function Login($data)
     {
         global $con;
+
+        $data = $con->prepare('INSERT INTO logs (type, data, ip_address, log_date) VALUES(:type, :data, :ip, :logdate)');
+        $data->execute(array(
+            ':type'    => 4,
+            ':data'    => $data,
+            ':ip'      => $_SERVER['REMOTE_ADDR'],
+            ':logdate' => time()
+        ));
     }
 }
 

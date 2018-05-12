@@ -16,8 +16,8 @@ include('header.php');
                     <a href="?action=newnotification" class="btn">New Notification</a>
                 <?php endif; ?>
 
-                <a href="#" class="btn icon-button right"><i class="fas fa-cog"></i></a>
-                <a href="#" class="btn icon-button right"><i class="fas fa-archive"></i></a>
+                <a href="options.php" class="btn icon-button right"><i class="fas fa-cog"></i></a>
+                <a href="logs.php" class="btn icon-button right"><i class="fas fa-archive"></i></a>
             </div>
         </div>
 
@@ -143,6 +143,58 @@ include('header.php');
                     header('Location: index.php');
                     exit;
                 ?>
+            <?php elseif(isset($_GET['action']) && $_GET['action'] == "change-password"): ?>
+                <div class="content col s12">
+                    <div class="content-header col s12">
+                        Change Password
+                    </div>
+
+                    <div class="content-box col s12">
+                        <form method="POST">
+                            <div class="input-field col s12">
+                                <label>Old Password</label>
+                                <input type="password" name="oldpassword" />
+                            </div>
+
+                            <div class="input-field col s12">
+                                <label>New Password</label>
+                                <input type="password" name="newpassword" />
+                            </div>
+
+                            <div class="input-field col s12">
+                                <label>Re Password</label>
+                                <input type="password" name="repassword" />
+                            </div>
+
+                            <div class="input-field col s12">
+                                <input type="submit" name="change" class="btn" value="Change Password" />
+                            </div>
+                        </form>
+                    </div>
+                    <?php if(isset($_POST['change'])): ?>
+                        <?php if(!empty($_POST['oldpassword']) && !empty($_POST['newpassword']) && !empty($_POST['repassword'])): ?>
+                            <?php if($_POST['newpassword'] == $_POST['repassword']): ?>
+                                <?php if($user->ChangePassword($_SESSION['username'], sha1($_POST['oldpassword'] . $user->Salt($_SESSION['username'])), $_POST['newpassword'])): ?>
+                                    <div class="response col s12 green">
+                                        Password has been changed!
+                                    </div>
+                                <?php else: ?>
+                                    <div class="response col s12 red">
+                                        Old password was incorrect!
+                                    </div>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <div class="response col s12 red">
+                                    Passwords do not match!
+                                </div>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <div class="response col s12 red">
+                                Please fill in all fields!
+                            </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </div>
             <?php else: ?>
                 <div class="content col s12 m9">
                     <table>
@@ -207,11 +259,11 @@ include('header.php');
                             </div>
 
                             <div class="input-field">
-                                <a href="#" class="btn info-button">Change Email</a>
+                                <a href="?action=change-email" class="btn info-button">Change Email</a>
                             </div>
 
                             <div class="input-field">
-                                <a href="#" class="btn info-button">Change Password</a>
+                                <a href="?action=change-password" class="btn info-button">Change Password</a>
                             </div>
                         <?php endforeach; ?>
                     </div>
