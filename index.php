@@ -195,6 +195,42 @@ include('header.php');
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
+            <?php elseif(isset($_GET['action']) && $_GET['action'] == "change-email"): ?>
+                <div class="content col s12">
+                    <div class="content-header col s12">
+                        Change Email
+                    </div>
+
+                    <div class="content-box col s12">
+                        <form method="POST">
+                            <div class="input-field col s12">
+                                <label>New Email</label>
+                                <input type="text" name="email" />
+                            </div>
+
+                            <div class="input-field col s12">
+                                <input type="submit" name="change" class="btn" value="Change Email" />
+                            </div>
+                        </form>
+                    </div>
+                    <?php if(isset($_POST['change'])): ?>
+                        <?php if(!empty($_POST['email'])): ?>
+                            <?php if($user->ChangeEmail($_SESSION['username'], $_POST['email'])): ?>
+                                <div class="response col s12 green">
+                                    Email has been changed!
+                                </div>
+                            <?php else: ?>
+                                <div class="response col s12 red">
+                                    Email already exists!
+                                </div>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <div class="response col s12 red">
+                                Please fill in all fields!
+                            </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </div>
             <?php else: ?>
                 <div class="content col s12 m9">
                     <table>

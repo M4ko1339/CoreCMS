@@ -291,6 +291,29 @@ Class User
         return false;
     }
 
+    public function ChangeEmail($username, $email)
+    {
+        global $con;
+
+        $data = $con->prepare('SELECT COUNT(*) FROM users WHERE email = :email');
+        $data->execute(array(
+            ':email' => $email
+        ));
+
+        if($data->fetchColumn() == 0)
+        {
+            $data = $con->prepare('UPDATE users SET email = :email WHERE username = :username');
+            $data->execute(array(
+                ':email'    => $email,
+                ':username' => $username
+            ));
+
+            return true;
+        }
+
+        return false;
+    }
+
     public function Edit($id, $email, $permissions)
     {
         global $con;
