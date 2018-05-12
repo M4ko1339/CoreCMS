@@ -16,7 +16,9 @@ include('header.php');
                     <a href="?action=newnotification" class="btn">New Notification</a>
                 <?php endif; ?>
 
-                <a href="options.php" class="btn icon-button right"><i class="fas fa-cog"></i></a>
+                <?php if($perms->Access($_SESSION['username'], 'options_view')): ?>
+                    <a href="options.php" class="btn icon-button right"><i class="fas fa-cog"></i></a>
+                <?php endif; ?>
 
                 <?php if($perms->Access($_SESSION['username'], 'logs_view')): ?>
                     <a href="logs.php" class="btn icon-button right"><i class="fas fa-archive"></i></a>

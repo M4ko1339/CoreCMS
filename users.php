@@ -12,8 +12,9 @@ if(!$perms->Access($_SESSION['username'], 'user_view'))
 
 $permissions = array(
     // General AdminCP
-    'login'       => isset($_POST['login_access']) ? $_POST['login_access'] : "0",
-    'logs_view'   => isset($_POST['logs_access']) ? $_POST['logs_access'] : "0",
+    'login'        => isset($_POST['login_access']) ? $_POST['login_access'] : "0",
+    'logs_view'    => isset($_POST['logs_access']) ? $_POST['logs_access'] : "0",
+    'options_view' => isset($_POST['options_access']) ? $_POST['options_access'] : "0",
 
     // News System
     'news_view'   => isset($_POST['news_access']) ? $_POST['news_access'] : "0",
@@ -92,6 +93,11 @@ $permissions = array(
                                     <label>
                                         <input type="checkbox" class="filled-in" name="logs_access" value="1" />
                                         <span>Logs Access</span>
+                                    </label>
+
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="options_access" value="1" />
+                                        <span>Options Access</span>
                                     </label>
                                 </p>
                             </fieldset>
@@ -242,6 +248,11 @@ $permissions = array(
                                     <label>
                                         <input type="checkbox" class="filled-in" name="logs_access" <?php echo ($access['logs_view'] ? "checked":""); ?> value="1" />
                                         <span>Logs Access</span>
+                                    </label>
+
+                                    <label>
+                                        <input type="checkbox" class="filled-in" name="options_access" <?php echo ($access['options_view'] ? "checked":""); ?> value="1" />
+                                        <span>Options Access</span>
                                     </label>
                                 </p>
                             </fieldset>
