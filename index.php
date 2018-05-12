@@ -205,6 +205,14 @@ include('header.php');
                                     <?php echo date('H:i - j. F, Y', $row['last_login']); ?>
                                 </div>
                             </div>
+
+                            <div class="input-field">
+                                <a href="#" class="btn info-button">Change Email</a>
+                            </div>
+
+                            <div class="input-field">
+                                <a href="#" class="btn info-button">Change Password</a>
+                            </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -248,6 +256,14 @@ include('header.php');
                             <div class="info-box-text">
                                 <?php echo date('H:i - j. F, Y', $row['last_login']); ?>
                             </div>
+                        </div>
+
+                        <div class="input-field">
+                            <a href="#" class="btn info-button">Change Email</a>
+                        </div>
+
+                        <div class="input-field">
+                            <a href="#" class="btn">Change Password</a>
                         </div>
                     <?php endforeach; ?>
                 </div>

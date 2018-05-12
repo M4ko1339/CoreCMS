@@ -46,6 +46,11 @@ body
     padding: 1px 0px 0px 1px !important;
 }
 
+.info-button
+{
+    width: 100%;
+}
+
 .active
 {
     border-color: red !important;
