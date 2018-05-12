@@ -567,6 +567,19 @@ Class Logging
             ':logdate' => time()
         ));
     }
+
+    public function User($data)
+    {
+        global $con;
+
+        $data = $con->prepare('INSERT INTO logs (type, data, ip_address, log_date) VALUES(:type, :data, :ip, :logdate)');
+        $data->execute(array(
+            ':type'    => 2,
+            ':data'    => $data,
+            ':ip'      => $_SERVER['REMOTE_ADDR'],
+            ':logdate' => time()
+        ));
+    }
 }
 
 ?>
