@@ -437,53 +437,66 @@ Class Notification
     {
         global $con;
 
-        $colors = array(
-            0 => 'green',  // Green
-            1 => 'orange', // Orange
-            2 => 'red'     // Red
-        );
-
-        $data = $con->prepare('UPDATE notfications SET type = :type, message = :message, active = 1 WHERE id = 1');
+        $data = $con->prepare('INSERT INTO notifications (type, message, active) VALUES(:type, :message, :active)');
         $data->execute(array(
-            ':type'    => $colors[$type],
-            ':message' => $message
+            ':type'    => $type,
+            ':message' => $message,
+            ':active'  => 1
         ));
     }
 
-    public function Toggle()
+    public function Toggle($id)
     {
         global $con;
 
-        $data = $con->prepare('SELECT * FROM notifications WHERE id = 1');
-        $data->execute();
+        $data = $con->prepare('SELECT * FROM notifications WHERE id = :id');
+        $data->execute(array(
+            ':id' => (int)$id
+        ));
 
         $result = $data->fetchAll(PDO::FETCH_ASSOC);
 
         foreach($result as $row)
         {
-            if($row['active'] == 1)
+            if($row['active'] == "1")
             {
-                $data = $con->prepare('UPDATE notifications SET active = 0 WHERE id = 1');
-                $data->execute();
+                $data = $con->prepare('UPDATE notifications SET active = 0 WHERE id = :id');
+                $data->execute(array(
+                    ':id' => (int)$id
+                ));
             }
             else
             {
-                $data = $con->prepare('UPDATE notifications SET active = 1 WHERE id = 1');
-                $data->execute();
+                $data = $con->prepare('UPDATE notifications SET active = 1 WHERE id = :id');
+                $data->execute(array(
+                    ':id' => (int)$id
+                ));
             }
         }
+    }
+
+    public function Edit($id, $type, $message)
+    {
+        global $con;
+
+        $data = $con->prepare('UPDATE notifications SET type = :color, message = :message WHERE id = :id');
+        $data->execute(array(
+            ':color'   => $type,
+            ':message' => $message,
+            ':id'      => (int)$id
+        ));
     }
 
     public function Broadcast()
     {
         global $con;
 
-        $data = $con->prepare('SELECT COUNT(*) FROM notifications WHERE id = 1 AND active = 1');
+        $data = $con->prepare('SELECT COUNT(*) FROM notifications WHERE active = 1');
         $data->execute();
 
         if($data->fetchColumn() == 1)
         {
-            $data = $con->prepare('SELECT * FROM notifications WHERE id = 1 AND active = 1');
+            $data = $con->prepare('SELECT * FROM notifications WHERE active = 1');
             $data->execute();
 
             return $data->fetchAll(PDO::FETCH_ASSOC);
