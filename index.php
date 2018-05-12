@@ -210,6 +210,15 @@ include('header.php');
                 </div>
             <?php endif; ?>
         <?php else: ?>
+            <div class="content col s12 m9">
+                <div class="content-header col s12">
+                    System Message
+                </div>
+
+                <div class="content-box col s12">
+                    Welcome to the CoreCMS Administration Panel.
+                </div>
+            </div>
             <div class="content col s12 m3">
                 <div class="content-box col s12">
                     <?php foreach($user->Info($_SESSION['username']) as $row): ?>
