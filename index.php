@@ -58,20 +58,19 @@ include('header.php');
                             </div>
                         </form>
                     </div>
-                </div>
-
-                <?php if(isset($_POST['create']) && $perms->Access($_SESSION['username'], 'notify_create')): ?>
-                    <?php if(!empty($_POST['message'])): ?>
-                        <?php $notify->Create($_POST['color'], $_POST['message']); ?>
-                        <div class="response col s12 green">
-                            Successfully created notification!
-                        </div>
-                    <?php else: ?>
-                        <div class="response col s12 red">
-                            Please fill in all fields!
-                        </div>
+                    <?php if(isset($_POST['create']) && $perms->Access($_SESSION['username'], 'notify_create')): ?>
+                        <?php if(!empty($_POST['color']) && !empty($_POST['message'])): ?>
+                            <?php $notify->Create($_POST['color'], $_POST['message']); ?>
+                            <div class="response col s12 green">
+                                Successfully created notification!
+                            </div>
+                        <?php else: ?>
+                            <div class="response col s12 red">
+                                Please fill in all fields!
+                            </div>
+                        <?php endif; ?>
                     <?php endif; ?>
-                <?php endif; ?>
+                </div>
             <?php elseif(isset($_GET['toggle']) && $notify->Exist((int)$_GET['toggle']) && $perms->Access($_SESSION['username'], 'notify_toggle')): ?>
                 <?php
 
@@ -82,57 +81,59 @@ include('header.php');
                 ?>
             <?php elseif(isset($_GET['edit']) && $notify->Exist((int)$_GET['edit']) && $perms->Access($_SESSION['username'], 'notify_edit')): ?>
                 <?php foreach($notify->View((int)$_GET['edit']) as $row): ?>
-                    <div class="content-header col s12">
-                        Modifying notification
-                    </div>
-
-                    <div class="content-box col s12">
-                        <form method="POST">
-                            <div class="input-field col s12">
-                                <label>Color</label>
-                                <br>
-                                <p>
-                                    <label>
-                                        <input class="with-gap" type="radio" name="color" value="green" <?php echo ($row['type'] == "green") ? "checked" : ""; ?> />
-                                        <span>Green</span>
-                                    </label>
-
-                                    <label>
-                                        <input class="with-gap" type="radio" name="color" value="orange" <?php echo ($row['type'] == "orange") ? "checked" : ""; ?> />
-                                        <span>Orange</span>
-                                    </label>
-
-                                    <label>
-                                        <input class="with-gap" type="radio" name="color" value="red" <?php echo ($row['type'] == "red") ? "checked" : ""; ?> />
-                                        <span>Red</span>
-                                    </label>
-                                </p>
-                            </div>
-
-                            <div class="input-field col s12">
-                                <label>Message</label>
-                                <input type="text" name="message" value="<?php echo $row['message']; ?>" />
-                            </div>
-
-                            <div class="input-field col s12">
-                                <input type="submit" name="edit" class="btn" value="Confirm" />
-                            </div>
-                        </form>
-                    </div>
-                <?php endforeach; ?>
-
-                <?php if(isset($_POST['edit']) && $perms->Access($_SESSION['username'], 'notify_edit')): ?>
-                    <?php if(!empty($_POST['message'])): ?>
-                        <?php $notify->Edit((int)$_GET['edit'], $_POST['color'], $_POST['message']); ?>
-                        <div class="response col s12 green">
-                            Successfully modified notification!
+                    <div class="content col s12">
+                        <div class="content-header col s12">
+                            Modifying notification
                         </div>
-                    <?php else: ?>
-                        <div class="response col s12 red">
-                            Please fill in all fields!
+
+                        <div class="content-box col s12">
+                            <form method="POST">
+                                <div class="input-field col s12">
+                                    <label>Color</label>
+                                    <br>
+                                    <p>
+                                        <label>
+                                            <input class="with-gap" type="radio" name="color" value="green" <?php echo ($row['type'] == "green") ? "checked" : ""; ?> />
+                                            <span>Green</span>
+                                        </label>
+
+                                        <label>
+                                            <input class="with-gap" type="radio" name="color" value="orange" <?php echo ($row['type'] == "orange") ? "checked" : ""; ?> />
+                                            <span>Orange</span>
+                                        </label>
+
+                                        <label>
+                                            <input class="with-gap" type="radio" name="color" value="red" <?php echo ($row['type'] == "red") ? "checked" : ""; ?> />
+                                            <span>Red</span>
+                                        </label>
+                                    </p>
+                                </div>
+
+                                <div class="input-field col s12">
+                                    <label>Message</label>
+                                    <input type="text" name="message" value="<?php echo $row['message']; ?>" />
+                                </div>
+
+                                <div class="input-field col s12">
+                                    <input type="submit" name="edit" class="btn" value="Confirm" />
+                                </div>
+                            </form>
                         </div>
+                    <?php endforeach; ?>
+
+                    <?php if(isset($_POST['edit']) && $perms->Access($_SESSION['username'], 'notify_edit')): ?>
+                        <?php if(!empty($_POST['message'])): ?>
+                            <?php $notify->Edit((int)$_GET['edit'], $_POST['color'], $_POST['message']); ?>
+                            <div class="response col s12 green">
+                                Successfully modified notification!
+                            </div>
+                        <?php else: ?>
+                            <div class="response col s12 red">
+                                Please fill in all fields!
+                            </div>
+                        <?php endif; ?>
                     <?php endif; ?>
-                <?php endif; ?>
+                </div>
             <?php elseif(isset($_GET['delid']) && $notify->Exist((int)$_GET['delid']) && $perms->Access($_SESSION['username'], 'notify_delete')): ?>
                 <?php
                     $notify->Delete((int)$_GET['delid']);
