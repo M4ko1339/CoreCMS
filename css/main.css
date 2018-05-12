@@ -36,6 +36,16 @@ body
     padding: 1px 0px 0px 0px !important;
 }
 
+.icon-button
+{
+    margin-left: 5px !important;
+}
+
+.icon-button i
+{
+    padding: 1px 0px 0px 1px !important;
+}
+
 .active
 {
     border-color: red !important;

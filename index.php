@@ -15,6 +15,9 @@ include('header.php');
                 <?php if($perms->Access($_SESSION['username'], 'notify_create')): ?>
                     <a href="?action=newnotification" class="btn">New Notification</a>
                 <?php endif; ?>
+
+                <a href="#" class="btn icon-button right"><i class="fas fa-cog"></i></a>
+                <a href="#" class="btn icon-button right"><i class="fas fa-archive"></i></a>
             </div>
         </div>
 
