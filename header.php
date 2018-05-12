@@ -6,6 +6,7 @@ include('inc/db.php');
 include('inc/functions.php');
 
 $user = new User();
+$log  = new Logging();
 
 if(!$user->Authenticated())
 {

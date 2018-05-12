@@ -605,6 +605,28 @@ Class Sanitize
 
 Class Logging
 {
+    public function Fetch($type)
+    {
+        global $con;
+
+        if($type == 0)
+        {
+            $data = $con->prepare('SELECT * FROM logs ORDER BY log_date DESC');
+            $data->execute();
+
+            return $data->fetchAll(PDO::FETCH_ASSOC);
+        }
+        else
+        {
+            $data = $con->prepare('SELECT * FROM logs WHERE type = :type ORDER BY log_date DESC');
+            $data->execute(array(
+                ':type' => (int)$type
+            ));
+
+            return $data->fetchAll(PDO::FETCH_ASSOC);
+        }
+    }
+
     public function Error($data)
     {
         global $con;
