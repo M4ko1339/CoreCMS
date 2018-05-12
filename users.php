@@ -365,6 +365,7 @@ $permissions = array(
                             <td><?php echo $row['email']; ?></td>
                             <td><?php   ?></td>
                             <td><?php  ?></td>
+
                             <?php if($perms->Access($_SESSION['username'], 'user_edit')): ?>
                                 <td><a href="?edit=<?php echo $row['id']; ?>"><i class="far fa-edit green-text"></i></a></td>
                             <?php endif; ?>

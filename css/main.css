@@ -78,6 +78,19 @@ input:not([type]):focus, input[type=text]:not(.browser-default):focus, input[typ
     border-color: #449C47;
 }
 
+[type="radio"]+span:not(.lever)
+{
+    line-height: 22px !important;
+    padding-left: 25px !important;
+    margin-right: 10px;
+}
+
+[type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:before, [type="radio"].with-gap:checked+span:after
+{
+    background-color: #449C47;
+    border-color: #449C47;
+}
+
 input[type="text"], input[type="password"], option, textarea
 {
     color: #DDD;

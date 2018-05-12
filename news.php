@@ -126,6 +126,7 @@ if(!$perms->Access($_SESSION['username'], 'news_view'))
                             <td><?php echo ucfirst($row['author']); ?></td>
                             <td><?php echo str_replace("<br>", " ", substr($row['content'], 0, 30)); ?>..</td>
                             <td><?php echo date('j. F, Y', $row['post_date']); ?></td>
+
                             <?php if($perms->Access($_SESSION['username'], 'news_edit')): ?>
                                 <td><a href="?edit=<?php echo $row['id']; ?>"><i class="far fa-edit green-text"></i></a></td>
                             <?php endif; ?>
