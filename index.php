@@ -12,7 +12,7 @@ include('header.php');
                     <a href="index.php" class="btn back-button"><i class="fas fa-chevron-left"></i></a>
                 <?php endif; ?>
 
-                <?php if($perms->Access($_SESSION['username'], 'notify_view')): ?>
+                <?php if($perms->Access($_SESSION['username'], 'notify_create')): ?>
                     <a href="?action=newnotification" class="btn">New Notification</a>
                 <?php endif; ?>
             </div>
