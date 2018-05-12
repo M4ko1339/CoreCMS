@@ -580,6 +580,16 @@ Class Logging
             ':logdate' => time()
         ));
     }
+
+    public function Attack($data)
+    {
+        global $con;
+    }
+
+    public function Logins($data)
+    {
+        global $con;
+    }
 }
 
 ?>
