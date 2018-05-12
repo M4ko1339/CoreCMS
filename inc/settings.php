@@ -5,7 +5,7 @@ $config = array(
     'USER'    => 'root',
     'PASS'    => '',
     'DB'      => 'corecms',
-    'VERSION' => '0.5'
+    'VERSION' => '0.7'
 );
 
 ?>
