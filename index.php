@@ -17,7 +17,10 @@ include('header.php');
                 <?php endif; ?>
 
                 <a href="options.php" class="btn icon-button right"><i class="fas fa-cog"></i></a>
-                <a href="logs.php" class="btn icon-button right"><i class="fas fa-archive"></i></a>
+
+                <?php if($perms->Access($_SESSION['username'], 'logs_view')): ?>
+                    <a href="logs.php" class="btn icon-button right"><i class="fas fa-archive"></i></a>
+                <?php endif; ?>
             </div>
         </div>
 

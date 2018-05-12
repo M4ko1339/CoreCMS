@@ -2,6 +2,12 @@
 
 include('header.php');
 
+if(!$perms->Access($_SESSION['username'], 'logs_view'))
+{
+    header('Location: index.php');
+    exit;
+}
+
 $type = array(
     1 => 'ERROR',
     2 => 'USER',
