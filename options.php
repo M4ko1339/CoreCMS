@@ -26,12 +26,12 @@ if(!$perms->Access($_SESSION['username'], 'options_view'))
 
                         <div class="input-field col s12">
                             <label>Website Name</label>
-                            <input type="text" name="websitename" value="" />
+                            <input type="text" name="name" value="" />
                         </div>
 
                         <div class="input-field col s12">
                             <label>Website URL</label>
-                            <input type="text" name="websitename" value="" />
+                            <input type="text" name="url" value="" />
                         </div>
                     </fieldset>
 

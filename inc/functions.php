@@ -349,66 +349,6 @@ Class User
 
 Class Permissions
 {
-    public function Regular()
-    {
-        return json_encode(array(
-            // General AdminCP
-            'login'       => 0,
-
-            // News System
-            'news_post'   => 0,
-            'news_edit'   => 0,
-            'news_delete' => 0,
-
-            // User System
-            'user_create' => 0,
-            'user_reset'  => 0,
-            'user_edit'   => 0,
-            'user_ban'    => 0,
-            'user_delete' => 0,
-        ));
-    }
-
-    public function Moderator()
-    {
-        return json_encode(array(
-            // General AdminCP
-            'login'       => 1,
-
-            // News System
-            'news_post'   => 1,
-            'news_edit'   => 1,
-            'news_delete' => 1,
-
-            // User System
-            'user_create' => 0,
-            'user_reset'  => 1,
-            'user_edit'   => 0,
-            'user_ban'    => 1,
-            'user_delete' => 0,
-        ));
-    }
-
-    public function Administrator()
-    {
-        return json_encode(array(
-            // General AdminCP
-            'login'       => 1,
-
-            // News System
-            'news_post'   => 1,
-            'news_edit'   => 1,
-            'news_delete' => 1,
-
-            // User System
-            'user_create' => 1,
-            'user_reset'  => 1,
-            'user_edit'   => 1,
-            'user_ban'    => 1,
-            'user_delete' => 1,
-        ));
-    }
-
     public function Access($username, $action)
     {
         global $con;
@@ -595,6 +535,21 @@ Class Options
             'secret' => ''
         ),
     );
+
+    public function Encode($options)
+    {
+        return json_encode($options);
+    }
+
+    public function Store($data)
+    {
+        global $con;
+
+        $data = $con->prepare('UPDATE options SET data = :data');
+        $data->execute(array(
+            ':data' => $data
+        ));
+    }
 }
 
 Class Sanitize
@@ -695,6 +650,11 @@ Class Logging
             ':logdate' => time()
         ));
     }
+}
+
+Class Install
+{
+    
 }
 
 ?>
