@@ -19,7 +19,19 @@ if(!$perms->Access($_SESSION['username'], 'options_view'))
         </div>
 
         <div class="content col s12">
+            <div class="content-box col s12">
+                <form method="POST">
+                    <div class="input-field col s12">
+                        <label>Website Name</label>
+                        <input type="text" name="websitename" value="CoreCMS" />
+                    </div>
 
+                    <div class="input-field col s12">
+                        <label>Website URL</label>
+                        <input type="text" name="websitename" value="http://corecms.com" />
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

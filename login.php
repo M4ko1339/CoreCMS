@@ -6,6 +6,7 @@ include('inc/db.php');
 include('inc/functions.php');
 
 $user  = new User();
+$log   = new Logging();
 $perms = new Permissions();
 
 if($user->Authenticated())
@@ -66,6 +67,8 @@ if($user->Authenticated())
                                 <?php
                                     $_SESSION['username'] = $_POST['username'];
                                     $_SESSION['password'] = sha1($_POST['password'] . $user->Salt($_POST['username']));
+
+                                    //$log->Login($_POST['username']);
 
                                     header('Location: index.php');
                                     exit;

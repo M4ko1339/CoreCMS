@@ -580,6 +580,23 @@ Class Notification
     }
 }
 
+Class Options
+{
+    var $options = array(
+        // General
+        'general' => array(
+            'website_name' => 'CoreCMS',
+            'website_url'  => 'http://corecms.com'
+        ),
+
+        // ReCaptcha
+        'recaptcha' => array(
+            'client' => '',
+            'secret' => ''
+        ),
+    );
+}
+
 Class Sanitize
 {
     public function Username($input)
