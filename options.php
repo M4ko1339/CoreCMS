@@ -21,14 +21,36 @@ if(!$perms->Access($_SESSION['username'], 'options_view'))
         <div class="content col s12">
             <div class="content-box col s12">
                 <form method="POST">
-                    <div class="input-field col s12">
-                        <label>Website Name</label>
-                        <input type="text" name="websitename" value="CoreCMS" />
-                    </div>
+                    <fieldset>
+                        <legend>General Settings</legend>
+
+                        <div class="input-field col s12">
+                            <label>Website Name</label>
+                            <input type="text" name="websitename" value="" />
+                        </div>
+
+                        <div class="input-field col s12">
+                            <label>Website URL</label>
+                            <input type="text" name="websitename" value="" />
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>ReCaptcha Settings</legend>
+
+                        <div class="input-field col s12">
+                            <label>Client</label>
+                            <input type="text" name="client" value="" />
+                        </div>
+
+                        <div class="input-field col s12">
+                            <label>Secret</label>
+                            <input type="text" name="client" value="" />
+                        </div>
+                    </fieldset>
 
                     <div class="input-field col s12">
-                        <label>Website URL</label>
-                        <input type="text" name="websitename" value="http://corecms.com" />
+                        <input type="submit" class="btn" name="save" value="Save Settings" />
                     </div>
                 </form>
             </div>
