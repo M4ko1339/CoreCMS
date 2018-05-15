@@ -599,53 +599,16 @@ Class Logging
         }
     }
 
-    public function Error($data)
+    public function Store($type, $string)
     {
         global $con;
 
-        $data = $con->prepare('INSERT INTO logs (type, data, ip_address, log_date) VALUES(:type, :data, :ip, :logdate)');
-        $data->execute(array(
-            ':type'    => 1,
-            ':data'    => $data,
-            ':ip'      => $_SERVER['REMOTE_ADDR'],
-            ':logdate' => time()
-        ));
-    }
-
-    public function User($data)
-    {
-        global $con;
+        // 1 = ERROR - 2 = USER - 3 = ATTACK - 4 = LOGIN
 
         $data = $con->prepare('INSERT INTO logs (type, data, ip_address, log_date) VALUES(:type, :data, :ip, :logdate)');
         $data->execute(array(
-            ':type'    => 2,
-            ':data'    => $data,
-            ':ip'      => $_SERVER['REMOTE_ADDR'],
-            ':logdate' => time()
-        ));
-    }
-
-    public function Attack($data)
-    {
-        global $con;
-
-        $data = $con->prepare('INSERT INTO logs (type, data, ip_address, log_date) VALUES(:type, :data, :ip, :logdate)');
-        $data->execute(array(
-            ':type'    => 3,
-            ':data'    => $data,
-            ':ip'      => $_SERVER['REMOTE_ADDR'],
-            ':logdate' => time()
-        ));
-    }
-
-    public function Login($data)
-    {
-        global $con;
-
-        $data = $con->prepare('INSERT INTO logs (type, data, ip_address, log_date) VALUES(:type, :data, :ip, :logdate)');
-        $data->execute(array(
-            ':type'    => 4,
-            ':data'    => $data,
+            ':type'    => $type,
+            ':data'    => $string,
             ':ip'      => $_SERVER['REMOTE_ADDR'],
             ':logdate' => time()
         ));
@@ -654,7 +617,7 @@ Class Logging
 
 Class Install
 {
-    
+
 }
 
 ?>

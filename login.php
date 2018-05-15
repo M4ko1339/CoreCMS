@@ -68,7 +68,7 @@ if($user->Authenticated())
                                     $_SESSION['username'] = $_POST['username'];
                                     $_SESSION['password'] = sha1($_POST['password'] . $user->Salt($_POST['username']));
 
-                                    //$log->Login($_POST['username']);
+                                    $log->Store(4, $_POST['username']);
 
                                     header('Location: index.php');
                                     exit;
