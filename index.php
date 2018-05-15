@@ -288,14 +288,14 @@ include('header.php');
                             <div class="info-box">
                                 <label>Last IP</label>
                                 <div class="info-box-text">
-                                    <?php echo $row['last_ip']; ?>
+                                    <?php echo ($user->LastIP($_SESSION['username']))?$user->LastIP($_SESSION['username']):"None"; ?>
                                 </div>
                             </div>
 
                             <div class="info-box">
                                 <label>Last Login</label>
                                 <div class="info-box-text">
-                                    <?php echo date('H:i - j. F, Y', $row['last_login']); ?>
+                                    <?php echo ($user->LastLogin($_SESSION['username']))?$date = date('H:i - j. F, Y', $user->LastLogin($_SESSION['username'])):"None"; ?>
                                 </div>
                             </div>
 

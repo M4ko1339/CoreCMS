@@ -133,6 +133,36 @@ Class User
         return $data->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function LastIP($username)
+    {
+        global $con;
+
+        $data = $con->prepare('SELECT ip_address FROM logs WHERE data = :username AND log_date = ( SELECT MAX(log_date) FROM logs WHERE data = :username AND log_date < ( SELECT MAX(log_date) FROM logs WHERE data = :username))');
+        $data->execute(array(
+            ':username' => $username
+        ));
+
+        foreach($data->fetchAll(PDO::FETCH_ASSOC) as $row)
+        {
+            return $row['ip_address'];
+        }
+    }
+
+    public function LastLogin($username)
+    {
+        global $con;
+
+        $data = $con->prepare('SELECT log_date FROM logs WHERE data = :username AND log_date = ( SELECT MAX(log_date) FROM logs WHERE data = :username AND log_date < ( SELECT MAX(log_date) FROM logs WHERE data = :username))');
+        $data->execute(array(
+            ':username' => $username
+        ));
+
+        foreach($data->fetchAll(PDO::FETCH_ASSOC) as $row)
+        {
+            return $row['log_date'];
+        }
+    }
+
     public function Exist($id)
     {
         global $con;
