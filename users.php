@@ -385,8 +385,8 @@ $permissions = array(
                         <tr>
                             <td><?php echo ucfirst($row['username']); ?></td>
                             <td><?php echo $row['email']; ?></td>
-                            <td><?php   ?></td>
-                            <td><?php  ?></td>
+                            <td><?php echo $row['last_ip']; ?></td>
+                            <td><?php echo date('H:i - j. F, Y', $row['last_login']); ?></td>
 
                             <?php if($perms->Access($_SESSION['username'], 'user_edit')): ?>
                                 <td><a href="?edit=<?php echo $row['id']; ?>"><i class="far fa-edit green-text"></i></a></td>

@@ -283,6 +283,13 @@ Class User
 
         if($data->fetchColumn() == 1)
         {
+            $data = $con->prepare('UPDATE users SET last_ip = :ip, last_login = :login WHERE username = :username');
+            $data->execute(array(
+                ':ip'       => $_SERVER['REMOTE_ADDR'],
+                ':login'    => time(),
+                ':username' => $username
+            ));
+            
             return true;
         }
 
