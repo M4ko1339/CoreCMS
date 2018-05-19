@@ -27,27 +27,77 @@ $type = array(
 
         <div class="content col s12">
             <div class="sub-menu col s12">
-                <a href="#" class="btn sub-menu-button current-nav">Errors</a>
-                <a href="#" class="btn sub-menu-button">Users</a>
-                <a href="#" class="btn sub-menu-button">Attacks</a>
-                <a href="#" class="btn sub-menu-button">Logins</a>
+                <a href="?type=1" <?php echo (!isset($_GET['type'])) || (int)$_GET['type'] == 1?"class=\"btn sub-menu-button current-nav\"":"class=\"btn sub-menu-button\""; ?>>Errors</a>
+                <a href="?type=2" <?php echo (isset($_GET['type'])) && (int)$_GET['type'] == 2?"class=\"btn sub-menu-button current-nav\"":"class=\"btn sub-menu-button\""; ?>>Users</a>
+                <a href="?type=3" <?php echo (isset($_GET['type'])) && (int)$_GET['type'] == 3?"class=\"btn sub-menu-button current-nav\"":"class=\"btn sub-menu-button\""; ?>>Attacks</a>
+                <a href="?type=4" <?php echo (isset($_GET['type'])) && (int)$_GET['type'] == 4?"class=\"btn sub-menu-button current-nav\"":"class=\"btn sub-menu-button\""; ?>>Logins</a>
             </div>
 
-            <table>
-                <th>Type</th>
-                <th>Data</th>
-                <th>IP Address</th>
-                <th>Log Date</th>
+            <?php if(isset($_GET['type']) && (int)$_GET['type'] == 2): ?>
+                <table>
+                    <th>Type</th>
+                    <th>Data</th>
+                    <th>IP Address</th>
+                    <th>Log Date</th>
 
-                <?php foreach($log->Fetch(0) as $row): ?>
-                    <tr>
-                        <td><?php echo $type[$row['type']]; ?></td>
-                        <td><?php echo $row['data']; ?></td>
-                        <td><?php echo $row['ip_address']; ?></td>
-                        <td><?php echo date('H:i - j. F, Y', $row['log_date']); ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
+                    <?php foreach($log->Fetch(2) as $row): ?>
+                        <tr>
+                            <td><?php echo $type[$row['type']]; ?></td>
+                            <td><?php echo $row['data']; ?></td>
+                            <td><?php echo $row['ip_address']; ?></td>
+                            <td><?php echo date('H:i - j. F, Y', $row['log_date']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            <?php elseif(isset($_GET['type']) && (int)$_GET['type'] == 3): ?>
+                <table>
+                    <th>Type</th>
+                    <th>Data</th>
+                    <th>IP Address</th>
+                    <th>Log Date</th>
+
+                    <?php foreach($log->Fetch(3) as $row): ?>
+                        <tr>
+                            <td><?php echo $type[$row['type']]; ?></td>
+                            <td><?php echo $row['data']; ?></td>
+                            <td><?php echo $row['ip_address']; ?></td>
+                            <td><?php echo date('H:i - j. F, Y', $row['log_date']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            <?php elseif(isset($_GET['type']) && (int)$_GET['type'] == 4): ?>
+                <table>
+                    <th>Type</th>
+                    <th>Data</th>
+                    <th>IP Address</th>
+                    <th>Log Date</th>
+
+                    <?php foreach($log->Fetch(4) as $row): ?>
+                        <tr>
+                            <td><?php echo $type[$row['type']]; ?></td>
+                            <td><?php echo $row['data']; ?></td>
+                            <td><?php echo $row['ip_address']; ?></td>
+                            <td><?php echo date('H:i - j. F, Y', $row['log_date']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            <?php else: ?>
+                <table>
+                    <th>Type</th>
+                    <th>Data</th>
+                    <th>IP Address</th>
+                    <th>Log Date</th>
+
+                    <?php foreach($log->Fetch(1) as $row): ?>
+                        <tr>
+                            <td><?php echo $type[$row['type']]; ?></td>
+                            <td><?php echo $row['data']; ?></td>
+                            <td><?php echo $row['ip_address']; ?></td>
+                            <td><?php echo date('H:i - j. F, Y', $row['log_date']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            <?php endif; ?>
         </div>
     </div>
 </div>
