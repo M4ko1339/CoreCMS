@@ -26,6 +26,13 @@ $type = array(
         </div>
 
         <div class="content col s12">
+            <div class="sub-menu col s12">
+                <a href="#" class="btn sub-menu-button current-nav">Errors</a>
+                <a href="#" class="btn sub-menu-button">Users</a>
+                <a href="#" class="btn sub-menu-button">Attacks</a>
+                <a href="#" class="btn sub-menu-button">Logins</a>
+            </div>
+
             <table>
                 <th>Type</th>
                 <th>Data</th>

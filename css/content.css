@@ -177,3 +177,24 @@ legend
     font-weight: 400;
     font-size: 0.9rem;
 }
+
+.sub-menu
+{
+    padding: 0px 0px 10px 0px !important;
+}
+
+.sub-menu-button
+{
+    background-color: #111 !important;
+    border: 1px #222 solid !important;
+}
+
+.sub-menu-button:hover, .sub-menu-button:focus
+{
+    background-color: #485460 !important;
+}
+
+.sub-menu .current-nav
+{
+    background-color: #485460 !important;
+}
