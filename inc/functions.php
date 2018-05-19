@@ -289,7 +289,7 @@ Class User
                 ':login'    => time(),
                 ':username' => $username
             ));
-            
+
             return true;
         }
 
@@ -650,6 +650,36 @@ Class Logging
             ':logdate' => time()
         ));
     }
+}
+
+Class Transaction
+{
+    public function Show()
+    {
+        global $con;
+
+        $data = $con->prepare('SELECT * FROM transactions');
+        $data->execute();
+
+        return $data->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function View($id)
+    {
+        global $con;
+
+        $data = $con->prepare('SELECT * FROM transactions WHERE id = :id');
+        $data->execute(array(
+            ':id' => (int)$id
+        ));
+
+        return $data->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
+
+Class Pagination
+{
+
 }
 
 Class Install
