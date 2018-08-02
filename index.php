@@ -57,8 +57,8 @@ include('header.php');
                             </div>
 
                             <div class="input-field col s12">
-                                <label>Message</label>
-                                <input type="text" name="message" />
+                                <label for="message">Message</label>
+                                <input type="text" id="message" name="message" />
                             </div>
 
                             <div class="input-field col s12">
@@ -118,8 +118,8 @@ include('header.php');
                                 </div>
 
                                 <div class="input-field col s12">
-                                    <label>Message</label>
-                                    <input type="text" name="message" value="<?php echo $row['message']; ?>" />
+                                    <label for="message">Message</label>
+                                    <input type="text" id="message" name="message" value="<?php echo $row['message']; ?>" />
                                 </div>
 
                                 <div class="input-field col s12">
@@ -157,18 +157,18 @@ include('header.php');
                     <div class="content-box col s12">
                         <form method="POST">
                             <div class="input-field col s12">
-                                <label>Old Password</label>
-                                <input type="password" name="oldpassword" />
+                                <label for="oldpass">Old Password</label>
+                                <input type="password" id="oldpass" name="oldpassword" />
                             </div>
 
                             <div class="input-field col s12">
-                                <label>New Password</label>
-                                <input type="password" name="newpassword" />
+                                <label for="newpass">New Password</label>
+                                <input type="password" id="newpass" name="newpassword" />
                             </div>
 
                             <div class="input-field col s12">
-                                <label>Re Password</label>
-                                <input type="password" name="repassword" />
+                                <label for="repass">Re Password</label>
+                                <input type="password" id="repass" name="repassword" />
                             </div>
 
                             <div class="input-field col s12">
@@ -209,8 +209,8 @@ include('header.php');
                     <div class="content-box col s12">
                         <form method="POST">
                             <div class="input-field col s12">
-                                <label>New Email</label>
-                                <input type="text" name="email" />
+                                <label for="email">New Email</label>
+                                <input type="text" id="email" name="email" />
                             </div>
 
                             <div class="input-field col s12">

@@ -44,13 +44,13 @@ if($user->Authenticated())
                     <div class="login-box-content">
                         <form method="POST">
                             <div class="input-field">
-                                <label>Username</label>
-                                <input type="text" name="username" />
+                                <label for="username">Username</label>
+                                <input type="text" id="username" name="username" />
                             </div>
 
                             <div class="input-field">
-                                <label>Password</label>
-                                <input type="password" name="password" />
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password" />
                             </div>
 
                             <div class="input-field">

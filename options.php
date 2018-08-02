@@ -25,13 +25,13 @@ if(!$perms->Access($_SESSION['username'], 'options_view'))
                         <legend>General Settings</legend>
 
                         <div class="input-field col s12">
-                            <label>Website Name</label>
-                            <input type="text" name="name" value="" />
+                            <label for="name">Website Name</label>
+                            <input type="text" id="name" name="name" value="" />
                         </div>
 
                         <div class="input-field col s12">
-                            <label>Website URL</label>
-                            <input type="text" name="url" value="" />
+                            <label for="url">Website URL</label>
+                            <input type="text" id="url" name="url" value="" />
                         </div>
                     </fieldset>
 
@@ -39,13 +39,13 @@ if(!$perms->Access($_SESSION['username'], 'options_view'))
                         <legend>ReCaptcha Settings</legend>
 
                         <div class="input-field col s12">
-                            <label>Client</label>
-                            <input type="text" name="client" value="" />
+                            <label for="client">Client</label>
+                            <input type="text" id="client" name="client" value="" />
                         </div>
 
                         <div class="input-field col s12">
-                            <label>Secret</label>
-                            <input type="text" name="client" value="" />
+                            <label for="secret">Secret</label>
+                            <input type="text" id="secret" name="client" value="" />
                         </div>
                     </fieldset>
 

@@ -62,23 +62,23 @@ $permissions = array(
                 <div class="content-box col s12">
                     <form method="POST">
                         <div class="input-field col s12">
-                            <label>Username</label>
-                            <input type="text" name="username" />
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" />
                         </div>
 
                         <div class="input-field col s12">
-                            <label>Email</label>
-                            <input type="text" name="email" />
+                            <label for="email">Email</label>
+                            <input type="text" id="email" name="email" />
                         </div>
 
                         <div class="input-field col s12">
-                            <label>Password</label>
-                            <input type="password" name="password" />
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" />
                         </div>
 
                         <div class="input-field col s12">
-                            <label>Re Password</label>
-                            <input type="password" name="repassword" />
+                            <label for="repassword">Re Password</label>
+                            <input type="password" id="repassword" name="repassword" />
                         </div>
 
                         <div class="input-field col s12">
@@ -232,8 +232,8 @@ $permissions = array(
                 <div class="content-box col s12">
                     <form method="POST">
                         <div class="input-field col s12">
-                            <label>Email</label>
-                            <input type="text" name="email" value="<?php echo $email; ?>" />
+                            <label for="email">Email</label>
+                            <input type="text" id="email" name="email" value="<?php echo $email; ?>" />
                         </div>
 
                         <div class="input-field col s12">

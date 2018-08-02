@@ -35,13 +35,13 @@ if(!$perms->Access($_SESSION['username'], 'news_view'))
                 <div class="content-box col s12">
                     <form method="POST">
                         <div class="input-field col s12">
-                            <label>Title</label>
-                            <input type="text" name="title" />
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title" />
                         </div>
 
                         <div class="input-field col s12">
-                            <label>Content</label>
-                            <textarea class="materialize-textarea" name="content"></textarea>
+                            <label for="content">Content</label>
+                            <textarea class="materialize-textarea" id="content" name="content"></textarea>
                         </div>
 
                         <div class="input-field col s12">
@@ -77,13 +77,13 @@ if(!$perms->Access($_SESSION['username'], 'news_view'))
                     <div class="content-box col s12">
                         <form method="POST">
                             <div class="input-field col s12">
-                                <label>Title</label>
-                                <input type="text" name="title" value="<?php echo $row['title']; ?>" />
+                                <label for="title">Title</label>
+                                <input type="text" id="title" name="title" value="<?php echo $row['title']; ?>" />
                             </div>
 
                             <div class="input-field col s12">
-                                <label>Content</label>
-                                <textarea class="materialize-textarea" name="content"><?php echo str_replace("<br>", "\n", $row['content']); ?></textarea>
+                                <label for="content">Content</label>
+                                <textarea class="materialize-textarea" id="content" name="content"><?php echo str_replace("<br>", "\n", $row['content']); ?></textarea>
                             </div>
 
                             <div class="input-field col s12">
