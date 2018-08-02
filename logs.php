@@ -12,7 +12,8 @@ $type = array(
     1 => 'ERROR',
     2 => 'USER',
     3 => 'ATTACK',
-    4 => 'LOGIN'
+    4 => 'LOGIN',
+    5 => 'USER LOGIN'
 );
 
 ?>
@@ -31,6 +32,7 @@ $type = array(
                 <a href="?type=2" <?php echo (isset($_GET['type'])) && (int)$_GET['type'] == 2?"class=\"btn sub-menu-button current-nav\"":"class=\"btn sub-menu-button\""; ?>>Users</a>
                 <a href="?type=3" <?php echo (isset($_GET['type'])) && (int)$_GET['type'] == 3?"class=\"btn sub-menu-button current-nav\"":"class=\"btn sub-menu-button\""; ?>>Attacks</a>
                 <a href="?type=4" <?php echo (isset($_GET['type'])) && (int)$_GET['type'] == 4?"class=\"btn sub-menu-button current-nav\"":"class=\"btn sub-menu-button\""; ?>>Logins</a>
+                <a href="?type=5" <?php echo (isset($_GET['type'])) && (int)$_GET['type'] == 5?"class=\"btn sub-menu-button current-nav\"":"class=\"btn sub-menu-button\""; ?>>User Logins</a>
             </div>
 
             <?php if(isset($_GET['type']) && (int)$_GET['type'] == 2): ?>
@@ -73,6 +75,22 @@ $type = array(
                     <th>Log Date</th>
 
                     <?php foreach($log->Fetch(4) as $row): ?>
+                        <tr>
+                            <td><?php echo $type[$row['type']]; ?></td>
+                            <td><?php echo $row['data']; ?></td>
+                            <td><?php echo $row['ip_address']; ?></td>
+                            <td><?php echo date('H:i - j. F, Y', $row['log_date']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            <?php elseif(isset($_GET['type']) && (int)$_GET['type'] == 5): ?>
+                <table>
+                    <th>Type</th>
+                    <th>Data</th>
+                    <th>IP Address</th>
+                    <th>Log Date</th>
+
+                    <?php foreach($log->Fetch(5) as $row): ?>
                         <tr>
                             <td><?php echo $type[$row['type']]; ?></td>
                             <td><?php echo $row['data']; ?></td>

@@ -640,7 +640,7 @@ Class Logging
     {
         global $con;
 
-        // 1 = ERROR - 2 = USER - 3 = ATTACK - 4 = LOGIN
+        // 1 = ERROR - 2 = USER - 3 = ATTACK - 4 = ADMIN LOGIN - 5 = USER LOGIN
 
         $data = $con->prepare('INSERT INTO logs (type, data, ip_address, log_date) VALUES(:type, :data, :ip, :logdate)');
         $data->execute(array(

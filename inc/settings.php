@@ -8,4 +8,8 @@ $config = array(
     'VERSION' => '0.7'
 );
 
+// Payment Options
+define('CURRENCY', 'EUR');
+define('CURRENCY_SIGN', '€');
+
 ?>

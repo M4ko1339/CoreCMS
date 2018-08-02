@@ -9,7 +9,7 @@ try
 }
 catch(PDOException $e)
 {
-    die($e->getMessage());
+    die('Server has encountered an unexpected error, please contact administration!');
 }
 
 ?>
